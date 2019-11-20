@@ -7,7 +7,7 @@ namespace MotivationProgram
     class Menu
     {
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
-        private enum MenuMain { AddWorkout =1  , Statistic, Group, User, Quit}
+        private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
         public void MainMenu()
         {
             MenuMain userChoice = 0;
@@ -55,7 +55,6 @@ namespace MotivationProgram
         {
             DateTime whenWorkedOut;
             double distance = 0;
-            int strengthLevel = 0;
             int minutesWorkedOut;
             bool happyWithChoice;
 
@@ -77,16 +76,6 @@ namespace MotivationProgram
             {
                 Console.Write("Distans: ");
                 distance = Program.TryDouble();
-            }
-            else if (workoutChoice == TypeOfWorkout.Strength)
-            {
-                Console.WriteLine("Vilken nivå utav träning har du tränat?");
-                Console.WriteLine("1. Lätt");
-                Console.WriteLine("2. Medium");
-                Console.WriteLine("3. Hård");
-                Console.Write("Nivå: ");
-                strengthLevel = Program.TryInt();
-                //TODO Nivå/typ av styrketräning
             }
 
             Console.Write("Träningstid i minuter: ");
