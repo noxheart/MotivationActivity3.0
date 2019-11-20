@@ -9,5 +9,24 @@ namespace MotivationLibrary
         {
             this.DistanceKM = Distance;
         }
+
+        public override  double CalculatePoints(int time, double distance)
+        {
+            double points = 0;
+            
+            if (time / distance <= 6 && time / distance >= 5 && time >= 15)
+            {
+                points = time * 2;
+            }
+            else if (time / distance < 5 && time >= 15)
+            {
+                points = time * 2.25;
+            }
+            else 
+            {
+                points = time * 1.75;
+            }
+            return points;
+        }
     }
 }

@@ -9,5 +9,13 @@ namespace MotivationLibrary
         {
             this.StrengthLevel = StrengthLevel;
         }
+
+        public override double CalculatePoints(int time, double level)
+        {
+            double points;
+            level = 1.5;
+            points = time * level;
+            return points;
+        }
     }
 }
