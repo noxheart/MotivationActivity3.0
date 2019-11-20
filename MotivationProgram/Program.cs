@@ -68,12 +68,14 @@ namespace MotivationProgram
                 try
                 {
                     date = Convert.ToDateTime(Console.ReadLine());
+                    break;
                 }
                 catch
                 {
                     ErrorMessage();
                 }
             }
+            return date;
         }
         /// <summary>
         /// Checks if user entered a double
