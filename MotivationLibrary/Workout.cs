@@ -12,5 +12,7 @@ namespace MotivationLibrary
             this.WhenWorkOutOccured = whenWorkedOut;
             this.MinutesWorkedOut = minutesWorkedOut;
         }
+
+        public abstract double CalculatePoints(int time, double distance);
     }
 }
