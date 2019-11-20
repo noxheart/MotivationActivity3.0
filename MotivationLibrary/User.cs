@@ -13,6 +13,7 @@ namespace MotivationLibrary
         public double WeightKG { get; private set; }
         public double LengthCM { get; private set; }
         public int PointsGoal { get; private set; }
+        public int Points { get; private set; }
 
         public User()
         {
