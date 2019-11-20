@@ -7,7 +7,7 @@ namespace MotivationProgram
     class Menu
     {
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
-        private enum MenuMain { Quit, AddWorkout, Statistic, Group, User}
+        private enum MenuMain { Quit , AddWorkout, Statistic, Group, User}
         public void MainMenu()
         {
             MenuMain userChoice = 0;
@@ -114,7 +114,7 @@ namespace MotivationProgram
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
-                    var workout = new Strength(whenWorkedOut, strengthLevel, minutesWorkedOut);
+                    var workout = new Strength(whenWorkedOut, minutesWorkedOut);
                     //TODO ADD TO DATABASE
                 }
             }
