@@ -7,7 +7,7 @@ namespace MotivationProgram
     class Menu
     {
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
-        private enum MenuMain { Quit , AddWorkout, Statistic, Group, User}
+        private enum MenuMain { AddWorkout =1  , Statistic, Group, User, Quit}
         public void MainMenu()
         {
             MenuMain userChoice = 0;
