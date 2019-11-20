@@ -7,42 +7,41 @@ namespace MotivationProgram
     class Menu
     {
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
+        private enum MenuMain { Quit, AddWorkout, Statistic, Group, User}
         public void MainMenu()
         {
+            MenuMain userChoice = 0;
             bool mainMenuLoop = true;
             while (mainMenuLoop)
             {
                 Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
                 //TODO Ge information om användaren, namn, poäng etc.
 
-                Console.WriteLine("1. Registrera träning");
-                Console.WriteLine("2. Avregistrera träning");
-                Console.WriteLine("3. Statistik");
-                Console.WriteLine("4. Grupp");
-                Console.WriteLine("5. Profil");
-                Console.WriteLine("6. Avsluta");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.AddWorkout)}. Registrera träning");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.Group)}. Grupp");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Avsluta");
                 Console.Write("Ditt val: ");
                 int input = Program.TryInt();
+                userChoice = (MenuMain)input;
+                
 
 
-                switch (input)
+                switch (userChoice)
                 {
-                    case 1:
+                    case MenuMain.AddWorkout:
                         AddWorkout();
                         break;
-                    case 2:
-                        //TODO Avregistrera träning
-                        break;
-                    case 3:
+                    case MenuMain.Statistic:
                         //TODO Statistik
                         break;
-                    case 4:
+                    case MenuMain.Group:
                         //TODO Grupp
                         break;
-                    case 5:
-                        //TODO Profil
+                    case MenuMain.User:
                         break;
-                    case 6:
+                    case MenuMain.Quit:
                         mainMenuLoop = false;
                         break;
                     default:
