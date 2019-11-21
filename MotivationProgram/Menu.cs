@@ -65,10 +65,10 @@ namespace MotivationProgram
             whenWorkedOut = Program.TryTime();
             //TODO Ta tiden från användaren
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
-            Console.WriteLine("1. Gång");
-            Console.WriteLine("2. Löpning");
-            Console.WriteLine("3. Simning");
-            Console.WriteLine("4. Styrketräning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
             TypeOfWorkout workoutChoice = GetChoiceFromUser();
 
             if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
