@@ -6,13 +6,13 @@ namespace MotivationLibrary
     {
         public DateTime WhenWorkOutOccured { get; protected set; }
         public int MinutesWorkedOut { get; protected set; }
-
-        public Workout(DateTime whenWorkedOut, int minutesWorkedOut)
+        public double pointsForWorkout { get; protected set; }
+    
+        public Workout(DateTime whenWorkedOut, int minutesWorkedOut, double points)
         {
             this.WhenWorkOutOccured = whenWorkedOut;
             this.MinutesWorkedOut = minutesWorkedOut;
+            this.pointsForWorkout = points;
         }
-
-        public abstract double CalculatePoints(int time, double distance);
     }
 }
