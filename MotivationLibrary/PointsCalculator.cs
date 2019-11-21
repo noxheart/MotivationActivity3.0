@@ -2,7 +2,7 @@ using System;
 
 namespace MotivationLibrary
 {
-    class PointsCalculator
+    public class PointsCalculator
     {
         double pointsForWorkout;
         double level1;

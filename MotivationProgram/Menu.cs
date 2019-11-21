@@ -9,6 +9,7 @@ namespace MotivationProgram
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
         private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
         Comments comment = new Comments();
+        PointsCalculator pointsCalculator = new PointsCalculator();
         public void MainMenu()
         {
             MenuMain userChoice = 0;
@@ -58,6 +59,7 @@ namespace MotivationProgram
             double distance = 0;
             int minutesWorkedOut;
             bool happyWithChoice;
+            double points = 0;
 
             Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
 
@@ -89,22 +91,26 @@ namespace MotivationProgram
             {
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
-                    var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut);
+                    points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
+                    var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points);
                     //TODO ADD TO DATABASE
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
-                    var workout = new Running(whenWorkedOut, distance, minutesWorkedOut);
+                    points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
+                    var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points);
                     //TODO ADD TO DATABASE
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
-                    var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut);
+                    points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
+                    var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points);
                     //TODO ADD TO DATABASE
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
-                    var workout = new Strength(whenWorkedOut, minutesWorkedOut);
+                    points = pointsCalculator.PointsForStength(minutesWorkedOut);
+                    var workout = new Strength(whenWorkedOut, minutesWorkedOut, points);
                     //TODO ADD TO DATABASE
                 }
             }
@@ -113,7 +119,7 @@ namespace MotivationProgram
                 Console.WriteLine("Du kommer nu att returneras till huvudmenyn.");
                 Thread.Sleep(1000);
             }
-            Console.WriteLine("Ditt träningspass har nu registrerats.");
+            Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
             Console.WriteLine(comment.PositiveComment());
             Thread.Sleep(5000);
         }
