@@ -8,6 +8,7 @@ namespace MotivationProgram
     {
         private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
         private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
+        Comments comment = new Comments();
         public void MainMenu()
         {
             MenuMain userChoice = 0;
@@ -113,7 +114,8 @@ namespace MotivationProgram
                 Thread.Sleep(1000);
             }
             Console.WriteLine("Ditt träningspass har nu registrerats.");
-            Thread.Sleep(1000);
+            Console.WriteLine(comment.PositiveComment());
+            Thread.Sleep(5000);
         }
         TypeOfWorkout GetChoiceFromUser()
         {
