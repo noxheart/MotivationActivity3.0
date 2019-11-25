@@ -1,12 +1,13 @@
 using System;
 using System.Threading;
 using MotivationLibrary;
+using ErrorCapture;
 
 namespace MotivationProgram
 {
+    public enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
     class Menu
     {
-        private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
         private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
         Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
@@ -25,7 +26,7 @@ namespace MotivationProgram
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Avsluta");
                 Console.Write("Ditt val: ");
-                int input = Program.TryInt();
+                int input = TryErrors.TryInt();
                 userChoice = (MenuMain)input;
                 
 
@@ -48,7 +49,7 @@ namespace MotivationProgram
                         break;
                     default:
                         Console.Clear();
-                        Program.ErrorMessage();
+                        TryErrors.ErrorMessage();
                         break;
                 }
             }
@@ -65,7 +66,7 @@ namespace MotivationProgram
 
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
-            whenWorkedOut = Program.TryTime();
+            whenWorkedOut = TryErrors.TryTime();
             //TODO Ta tiden från användaren
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
             Console.WriteLine("1. Gång");
@@ -78,14 +79,14 @@ namespace MotivationProgram
             workoutChoice == TypeOfWorkout.Swimming)
             {
                 Console.Write("Distans: ");
-                distance = Program.TryDouble();
+                distance = TryErrors.TryDouble();
             }
 
             Console.Write("Träningstid i minuter: ");
-            minutesWorkedOut = Program.TryInt();
+            minutesWorkedOut = TryErrors.TryInt();
 
             Console.Write("Är du nöjd med träningen (J/N)?");
-            happyWithChoice = Program.TryYesOrNo();
+            happyWithChoice = TryErrors.TryYesOrNo();
 
             if (happyWithChoice == true)
             {
@@ -93,25 +94,25 @@ namespace MotivationProgram
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(TypeOfWorkout.Walking);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(whenWorkedOut, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
             }
             else
@@ -138,7 +139,7 @@ namespace MotivationProgram
                 }
                 catch
                 {
-                    Program.ErrorMessage();
+                    TryErrors.ErrorMessage();
                 }
             }
             return workoutChoice;
