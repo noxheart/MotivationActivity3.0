@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MotivationLibrary\MotivationLibrary.csproj" />
+    <ProjectReference Include="..\ErrorCapture\ErrorCapture.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
