@@ -121,7 +121,14 @@ namespace MotivationProgram
                 Thread.Sleep(1000);
             }
             Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
-            Console.WriteLine(comment.PositiveComment());
+            if (points >= 80)
+            {
+                Console.WriteLine(comment.PositiveComment());
+            }
+            else
+            {
+                Console.Write(comment.NegativeComment());
+            }
             Thread.Sleep(5000);
         }
         TypeOfWorkout GetChoiceFromUser()
