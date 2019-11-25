@@ -14,8 +14,8 @@
             "args": [],
             "cwd": "${workspaceFolder}/MotivationProgram",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "console": "integratedTerminal",
+            "stopAtEntry": true
         },
         {
             "name": ".NET Core Attach",

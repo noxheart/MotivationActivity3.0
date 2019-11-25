@@ -2,7 +2,7 @@ using System;
 
 namespace MotivationLibrary
 {
-    class User
+    public class User
     {
         public int ID { get; private set; }
         public string UserName { get; private set; }
