@@ -5,9 +5,9 @@ using ErrorCapture;
 
 namespace MotivationProgram
 {
+    public enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
     class Menu
     {
-        private enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
         private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
         Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
@@ -94,25 +94,25 @@ namespace MotivationProgram
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(TypeOfWorkout.Walking);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(whenWorkedOut, minutesWorkedOut, points);
-                    //TODO ADD TO DATABASE
+                    workout.AddWorkout(workout);
                 }
             }
             else
