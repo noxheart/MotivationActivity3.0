@@ -6,7 +6,7 @@ namespace MotivationLibrary
     {
         public string PositiveComment()
         {
-        string[] positive = new string[5];
+        string[] positive = new string[11];
         positive[0] = "Du klarar av mer än vad du tror! ";
         positive[1] = "Du är stark och unik! ";
         positive[2] = "Du är fantastisk! ";
@@ -27,7 +27,7 @@ namespace MotivationLibrary
         }
         public string NegativeComment()
         {
-        string[] negative = new string[8];
+        string[] negative = new string[9];
         negative[0] = "Jag vet att du kan bättre... ";
         negative[1] = "Jag vet koma patienter som gör mer än vad du gör... ";
         negative[2] = "Jag blir så besviken...";
