@@ -8,18 +8,22 @@ namespace MotivationProgram
     public enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
     class Menu
     {
-        private enum MenuMain {Quit, AddWorkout , Statistic, Group, User}
+        private enum MenuMain { Quit, AddWorkout, Statistic, Group, User }
         Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
-        public void MainMenu()
+        public void MainMenu(User user)
         {
             MenuMain userChoice = 0;
             bool mainMenuLoop = true;
             while (mainMenuLoop)
             {
-                Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
+                 Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
+                Console.WriteLine($"Välkommen {user.UserName}");
+                if (user.PointsGoal > 0)
+                {
+                    Console.WriteLine($"Den här veckan har du uppnåt {user.Points}/ {user.PointsGoal} poäng.\n");
+                }
                 //TODO Ge information om användaren, namn, poäng etc.
-
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.AddWorkout)}. Registrera träning");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Group)}. Grupp");
@@ -28,7 +32,7 @@ namespace MotivationProgram
                 Console.Write("Ditt val: ");
                 int input = TryErrors.TryInt();
                 userChoice = (MenuMain)input;
-                
+
 
 
                 switch (userChoice)
@@ -94,25 +98,25 @@ namespace MotivationProgram
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout(TypeOfWorkout.Walking);
+                    workout.AddWorkout();
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout(workout);
+                    workout.AddWorkout();
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout(workout);
+                    workout.AddWorkout();
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(whenWorkedOut, minutesWorkedOut, points);
-                    workout.AddWorkout(workout);
+                    workout.AddWorkout();
                 }
             }
             else
