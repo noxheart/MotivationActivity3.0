@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace MotivationLibrary
 {
@@ -81,6 +82,11 @@ namespace MotivationLibrary
         {
             level1 = 1.5;
             pointsForWorkout = time * level1;
+
+            pointsForWorkout = double.Parse(pointsForWorkout.ToString(), CultureInfo.GetCultureInfo("en-GB"));
+
+            Console.WriteLine(pointsForWorkout);
+
             return pointsForWorkout;
         }
     }

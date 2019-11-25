@@ -20,18 +20,19 @@ namespace MotivationLibrary
                 return connection.Query<Workout>("Select * from SeeAllWorkouts");
             }
         }
-        public void AddWorkouts(Workout workout)
+        public void AddWorkouts(Workout workout, User user)
         {
+            float pointsForWorkout = Convert.ToSingle(workout.PointsForWorkout);
             using (SqlConnection connection = new SqlConnection(connectionString))
                 if (workout.GetType() == typeof(Strength))
                 {
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points) " +
-                     $"values {workout.GetType()}, User, {workout.WhenWorkOutOccured}, {workout.MinutesWorkedOut}, {workout.PointsForWorkout}");
+                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {pointsForWorkout}");
                 }
                 else
                 {
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values {workout.GetType()}, User, {workout.WhenWorkOutOccured}, {workout.MinutesWorkedOut}, {workout.PointsForWorkout}");
+                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {pointsForWorkout}");
                 }
         }
         public User GetLogin(string UserName, string Password)
