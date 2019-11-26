@@ -2,9 +2,35 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    var button = Request.Query["button"];
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-left" style="background-color:white;">
+    @switch (button)
+    {
+        case "Registrera träning":
+        <div class="text-center"><p>Registrera träning</p></div>
+        break;
+
+        case "Statistik":
+        <div class="text-center"><p>Statistik</p></div>
+        break;
+
+        case "Grupp":
+        <div class="text-center"><p>Grupp</p></div>
+        break;
+        
+        case "Profil":
+        <div class="text-center"><p>Profil</p></div>
+        break;
+
+        case "Logga ut":
+        <div class="text-center"><p>Du loggas nu ut...</p></div>
+        break;
+
+        default:
+        <div class="text-center"><p>Välkommen till AktivitetsMotiveraren!</p>
+        </div>
+        break;
+    }
 </div>
