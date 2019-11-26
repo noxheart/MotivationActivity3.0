@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using Dapper;
 using System.Linq;
+using System.Globalization;
 
 namespace MotivationLibrary
 {
@@ -22,17 +23,15 @@ namespace MotivationLibrary
         }
         public void AddWorkouts(Workout workout, User user)
         {
-            float pointsForWorkout = Convert.ToSingle(workout.PointsForWorkout);
             using (SqlConnection connection = new SqlConnection(connectionString))
                 if (workout.GetType() == typeof(Strength))
                 {
-                    connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points) " +
-                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {pointsForWorkout}");
+                    connection.Query($"dbo.InsertWorkout {workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, '{workout.PointsForWorkout.ToString()}', '{null}'");
                 }
                 else
                 {
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {pointsForWorkout}");
+                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {Convert.ToDouble(workout.PointsForWorkout.ToString().Replace(",","."))}");
                 }
         }
         public User GetLogin(string UserName, string Password)
@@ -50,14 +49,6 @@ namespace MotivationLibrary
                 }
                     
             }
-            /*if (numberOfTrueLogin > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }*/
         }
         public IEnumerable<User> GetUser(string UserName)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading;
 using ErrorCapture;
 using MotivationLibrary;
@@ -10,6 +11,11 @@ namespace MotivationProgram
         {
             string UserName = "";
             string Password = "";
+            
+            var formatdec = new NumberFormatInfo();
+            formatdec.NumberDecimalSeparator = ".";
+
+
 
             UserName = TryErrors.TryString();
             Password = TryErrors.TryString();
