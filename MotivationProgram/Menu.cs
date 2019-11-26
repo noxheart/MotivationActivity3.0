@@ -198,11 +198,68 @@ namespace MotivationProgram
         }
         void UserMenu()
         {
+            MenuUser userChoice = 0;
+
+            Console.Clear();
+            Console.WriteLine($"{Convert.ToInt32(MenuUser.ChangeGoals)}. Ändra dina mål");
+            Console.WriteLine($"{Convert.ToInt32(MenuUser.ChangeUserInfo)}. Ändra din information");
+            Console.WriteLine($"{Convert.ToInt32(MenuUser.Quit)}. Avsluta");
+            Console.Write("Ditt val: ");
+            int input = TryErrors.TryInt();
+            userChoice = (MenuUser)input;
+
+            switch(userChoice)
+            {
+                case MenuUser.ChangeGoals:
+                    //User.ChangeGoals();
+                    break;
+
+                case MenuUser.ChangeUserInfo:
+                    //TODO sub menu/metodanrop?
+                    break;
+
+                case MenuUser.Quit:
+                    break;
+
+                default:
+                    Console.Clear();
+                    TryErrors.ErrorMessage();
+                    break;
+
+            }
+        
 
         }
         void StatisticMenu()
         {
+            MenuStatistic UserChoice = 0;
 
+            Console.Clear();
+            Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Personal)}. Personlig statistik");
+            Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Group)}. Grupp statistik");
+            Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Quit)}. Avsluta");
+            Console.Write("Ditt val: ");
+            int input = TryErrors.TryInt();
+            UserChoice = (MenuStatistic)input;
+
+            switch(UserChoice)
+            {
+                case MenuStatistic.Personal:
+                    //Statistics.PersonalStatistics();
+                    break;
+
+                case MenuStatistic.Group:
+                    //Statistics.GroupStatistics();
+                    break;
+
+                case MenuStatistic.Quit:
+                    break;
+
+                default:
+                    Console.Clear();
+                    TryErrors.ErrorMessage();
+                    break;
+            }
         }
     }
 }
