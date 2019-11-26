@@ -8,7 +8,9 @@ namespace MotivationProgram
     class Menu
     {
         private enum MenuMain { Quit, AddWorkout, Statistic, Group, User }
-        private enum MenuGroup {CreatGroup = 1, JoinGroup, LeaveGroup, Compete}
+        private enum MenuGroup { Quit = 0, CreatGroup, JoinGroup, LeaveGroup, Compete }
+        private enum MenuUser { Quit = 0, ChangeUserInfo, ChangeGoals }
+        private enum MenuStatistic { Quit = 0, Personal, Group }
         Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
         Group Group = new Group();
@@ -18,7 +20,7 @@ namespace MotivationProgram
             bool mainMenuLoop = true;
             while (mainMenuLoop)
             {
-                 Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
+                Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
                 Console.WriteLine($"Välkommen {user.UserName}");
                 if (user.PointsGoal > 0)
                 {
@@ -173,27 +175,33 @@ namespace MotivationProgram
             switch (userChoice)
             {
                 case MenuGroup.CreatGroup:
-                Group.CreatGroup();
-                break;
+                    Group.CreatGroup();
+                    break;
 
                 case MenuGroup.JoinGroup:
-                Group.AddMemberToGroup();
-                break;
+                    Group.AddMemberToGroup();
+                    break;
 
                 case MenuGroup.LeaveGroup:
-                Group.LeaveGroup();
-                break;
+                    Group.LeaveGroup();
+                    break;
 
                 case MenuGroup.Compete:
-                //TODO fixa tävling
-                break;
+                    //TODO fixa tävling
+                    break;
 
                 default:
-                Console.Clear();
-                TryErrors.ErrorMessage();
-                break;
+                    Console.Clear();
+                    TryErrors.ErrorMessage();
+                    break;
             }
+        }
+        void UserMenu()
+        {
 
+        }
+        void StatisticMenu()
+        {
 
         }
     }
