@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using Dapper;
 using System.Linq;
+using System.Globalization;
 
 namespace MotivationLibrary
 {
@@ -20,18 +21,17 @@ namespace MotivationLibrary
                 return connection.Query<Workout>("Select * from SeeAllWorkouts");
             }
         }
-        public void AddWorkouts(Workout workout)
+        public void AddWorkouts(Workout workout, User user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
                 if (workout.GetType() == typeof(Strength))
                 {
-                    connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points) " +
-                     $"values {workout.GetType()}, User, {workout.WhenWorkOutOccured}, {workout.MinutesWorkedOut}, {workout.PointsForWorkout}");
+                    connection.Query($"dbo.InsertWorkout {workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, '{workout.PointsForWorkout.ToString()}', '{null}'");
                 }
                 else
                 {
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values {workout.GetType()}, User, {workout.WhenWorkOutOccured}, {workout.MinutesWorkedOut}, {workout.PointsForWorkout}");
+                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {Convert.ToDouble(workout.PointsForWorkout.ToString().Replace(",","."))}");
                 }
         }
         public User GetLogin(string UserName, string Password)
@@ -49,14 +49,6 @@ namespace MotivationLibrary
                 }
                     
             }
-            /*if (numberOfTrueLogin > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }*/
         }
         public IEnumerable<User> GetUser(string UserName)
         {

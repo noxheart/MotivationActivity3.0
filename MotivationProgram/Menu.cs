@@ -5,7 +5,6 @@ using ErrorCapture;
 
 namespace MotivationProgram
 {
-    public enum TypeOfWorkout { Walking = 1, Running, Swimming, Strength }
     class Menu
     {
         private enum MenuMain { Quit, AddWorkout, Statistic, Group, User }
@@ -40,7 +39,7 @@ namespace MotivationProgram
                 switch (userChoice)
                 {
                     case MenuMain.AddWorkout:
-                        AddWorkout();
+                        AddWorkout(user);
                         break;
                     case MenuMain.Statistic:
                         //TODO Statistik
@@ -60,7 +59,7 @@ namespace MotivationProgram
                 }
             }
         }
-        void AddWorkout()
+        void AddWorkout(User user)
         {
             DateTime whenWorkedOut;
             double distance = 0;
@@ -99,26 +98,26 @@ namespace MotivationProgram
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
-                    var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout();
+                    var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Walking);
+                    workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
-                    var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout();
+                    var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Running);
+                    workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
-                    var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points);
-                    workout.AddWorkout();
+                    var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Swimming);
+                    workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
-                    var workout = new Strength(whenWorkedOut, minutesWorkedOut, points);
-                    workout.AddWorkout();
+                    var workout = new Strength(whenWorkedOut, minutesWorkedOut, points, TypeOfWorkout.Strength);
+                    workout.AddWorkout(user);
                 }
             }
             else
