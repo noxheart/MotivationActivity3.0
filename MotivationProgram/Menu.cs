@@ -9,8 +9,10 @@ namespace MotivationProgram
     class Menu
     {
         private enum MenuMain { Quit, AddWorkout, Statistic, Group, User }
+        private enum MenuGroup {CreatGroup = 1, JoinGroup, LeaveGroup, Compete}
         Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
+        Group Group = new Group();
         public void MainMenu(User user)
         {
             MenuMain userChoice = 0;
@@ -44,7 +46,7 @@ namespace MotivationProgram
                         //TODO Statistik
                         break;
                     case MenuMain.Group:
-                        //TODO Grupp
+                        GroupMenu();
                         break;
                     case MenuMain.User:
                         break;
@@ -154,6 +156,46 @@ namespace MotivationProgram
                 }
             }
             return workoutChoice;
+        }
+        void GroupMenu()
+        {
+            MenuGroup userChoice = 0;
+
+            Console.Clear();
+            Console.WriteLine("Vad vill du göra?");
+            Console.WriteLine($"{Convert.ToInt32(MenuGroup.CreatGroup)}. Skapa grupp");
+            Console.WriteLine($"{Convert.ToInt32(MenuGroup.JoinGroup)}. Gå med i grupp");
+            Console.WriteLine($"{Convert.ToInt32(MenuGroup.LeaveGroup)}. Lämna grupp");
+            Console.WriteLine($"{Convert.ToInt32(MenuGroup.Compete)}. Tävla");
+            Console.Write("Ditt val: ");
+            int input = TryErrors.TryInt();
+            userChoice = (MenuGroup)input;
+
+            switch (userChoice)
+            {
+                case MenuGroup.CreatGroup:
+                Group.CreatGroup();
+                break;
+
+                case MenuGroup.JoinGroup:
+                Group.AddMemberToGroup();
+                break;
+
+                case MenuGroup.LeaveGroup:
+                Group.LeaveGroup();
+                break;
+
+                case MenuGroup.Compete:
+                //TODO fixa tävling
+                break;
+
+                default:
+                Console.Clear();
+                TryErrors.ErrorMessage();
+                break;
+            }
+
+
         }
     }
 }
