@@ -9,9 +9,9 @@ namespace MotivationLibrary
         double level1;
         double level2;
         double level3;
-        double timeLow;
-        double timeHigh;
-        int minWorkoutTime = 15;
+        double timeLow; //TODO Förtydliga variabelnamn.
+        double timeHigh; //TODO Förtydliga variabelnamn.
+        int minimumWorkoutTime = 15;
         public double PointsForRunning(int time, double distance)
         {
             level1 = 1.75;
@@ -20,15 +20,15 @@ namespace MotivationLibrary
             timeLow = 5;
             timeHigh = 6;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minWorkoutTime)
+            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minWorkoutTime)
+            else if (time / distance < timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
-            else 
+            else
             {
                 pointsForWorkout = time * level1;
             }
@@ -42,15 +42,15 @@ namespace MotivationLibrary
             timeLow = 10;
             timeHigh = 12;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minWorkoutTime)
+            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minWorkoutTime)
+            else if (time / distance < timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
-            else 
+            else
             {
                 pointsForWorkout = time * level1;
             }
@@ -64,15 +64,15 @@ namespace MotivationLibrary
             timeLow = 17.5;
             timeHigh = 24;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minWorkoutTime)
+            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minWorkoutTime)
+            else if (time / distance < timeLow && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
-            else 
+            else
             {
                 pointsForWorkout = time * level1;
             }
@@ -84,6 +84,11 @@ namespace MotivationLibrary
             pointsForWorkout = time * level1;
 
             return pointsForWorkout;
+        }
+        public double PointsForUserThisWeek(double points)
+        {
+            double pointsThisWeek = 0;
+            return pointsThisWeek;
         }
     }
 }

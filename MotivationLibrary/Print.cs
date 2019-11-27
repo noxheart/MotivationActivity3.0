@@ -4,17 +4,22 @@ namespace MotivationLibrary
 {
     public class Print
     {
-        public void PrintStatistic(Workout workout)//ALLA ANVÄNDARE //TODO FIX where  username like "username"
+        public void PrintStatistic(Workout workout)
         {
-            if ()
+            if (workout.GetType() == typeof(Strength))
+            {
                 Console.WriteLine($"{workout.WorkoutType.ToString()}\n" +
                 $"Datum: {workout.WhenWorkOutOccured}\n" +
                 $"Minuter: {workout.MinutesWorkedOut}\n" +
                 $"Poäng: {workout.PointsForWorkout}\n");
-
-            else
+            }
+            else //if it's walking,runnig, swimming
             {
-
+                Console.WriteLine($"{workout.WorkoutType.ToString()}\n" +
+                $"Datum: {workout.WhenWorkOutOccured}\n" +
+                $"Minuter: {workout.MinutesWorkedOut}\n" +
+                $"Poäng: {workout.PointsForWorkout}\n");
+                //TODO DISTANCE
             }
         }
     }

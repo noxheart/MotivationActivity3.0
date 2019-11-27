@@ -21,7 +21,6 @@ namespace MotivationLibrary
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
             db.AddWorkouts(this, user);
-
         }
     }
 }

@@ -21,11 +21,9 @@ namespace MotivationProgram
             while (mainMenuLoop)
             {
                 Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
-                Console.WriteLine($"Välkommen {user.UserName}");
-                if (user.PointsGoal > 0)
-                {
-                    Console.WriteLine($"Den här veckan har du uppnåt {user.Points}/ {user.PointsGoal} poäng.\n");
-                }
+
+                PointsInformationForUser(user, 7);
+
                 //TODO Ge information om användaren, namn, poäng etc.
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.AddWorkout)}. Registrera träning");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
@@ -41,7 +39,7 @@ namespace MotivationProgram
                 switch (userChoice)
                 {
                     case MenuMain.AddWorkout:
-                        AddWorkout(user);
+                        AddWorkoutInputMenu(user);
                         break;
                     case MenuMain.Statistic:
                         //TODO Statistik
@@ -61,7 +59,7 @@ namespace MotivationProgram
                 }
             }
         }
-        void AddWorkout(User user)
+        void AddWorkoutInputMenu(User user)
         {
             DateTime whenWorkedOut;
             double distance = 0;
@@ -208,7 +206,7 @@ namespace MotivationProgram
             int input = TryErrors.TryInt();
             userChoice = (MenuUser)input;
 
-            switch(userChoice)
+            switch (userChoice)
             {
                 case MenuUser.ChangeGoals:
                     //User.ChangeGoals();
@@ -227,7 +225,7 @@ namespace MotivationProgram
                     break;
 
             }
-        
+
 
         }
         void StatisticMenu()
@@ -242,7 +240,7 @@ namespace MotivationProgram
             int input = TryErrors.TryInt();
             UserChoice = (MenuStatistic)input;
 
-            switch(UserChoice)
+            switch (UserChoice)
             {
                 case MenuStatistic.Personal:
                     //Statistics.PersonalStatistics();
@@ -259,6 +257,16 @@ namespace MotivationProgram
                     Console.Clear();
                     TryErrors.ErrorMessage();
                     break;
+            }
+        }
+        public void PointsInformationForUser(User user, int days)
+        {
+            var stats = new Statistics();
+
+            Console.WriteLine($"Välkommen {user.UserName}");
+            if (user.PointsGoal > 0)
+            {
+               // Console.WriteLine($"Den här veckan har du uppnåt {stats.WorkOutPointsFor(days, user)}/ {user.PointsGoal} poäng.\n");
             }
         }
     }
