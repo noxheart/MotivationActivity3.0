@@ -9,6 +9,7 @@ namespace MotivationProgram
     {
         static void Main(string[] args)
         {
+            Console.Clear();
             string UserName = "";
             string Password = "";
 

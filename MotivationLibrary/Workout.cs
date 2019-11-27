@@ -9,13 +9,21 @@ namespace MotivationLibrary
         public int MinutesWorkedOut { get; protected set; }
         public double PointsForWorkout { get; protected set; }
         public int WorkoutType { get; protected set; }
-        public Workout(){}
-        public Workout(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkedOut, double points)
+        //Konstruktor för statistik
+        public Workout(int workoutType, DateTime whenWorkedOut, int minutesWorkOut, double points)
         {
             this.WhenWorkOutOccured = whenWorkedOut;
-            this.MinutesWorkedOut = minutesWorkedOut;
+            this.MinutesWorkedOut = minutesWorkOut;
             this.PointsForWorkout = points;
-            this.WorkoutType = (int)workout;
+            this.WorkoutType = workoutType;
+        }
+        //Konstruktor för insert
+        public Workout(TypeOfWorkout Workout, DateTime WhenWorkedOut, int MinutesWorkedOut, double Points)
+        {
+            this.WhenWorkOutOccured = WhenWorkedOut;
+            this.MinutesWorkedOut = MinutesWorkedOut;
+            this.PointsForWorkout = Points;
+            this.WorkoutType = (int)Workout;
         }
         public void AddWorkout(User user)
         {

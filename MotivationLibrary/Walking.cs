@@ -8,5 +8,9 @@ namespace MotivationLibrary
         {
 
         }
+        public Walking(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut, double PointsForWorkout,double DistanceKM) : base(WorkoutType, WhenWorkOutOccured , DistanceKM ,MinutesWorkedOut, PointsForWorkout)
+        {
+
+        }
     }
 }
