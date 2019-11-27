@@ -29,7 +29,7 @@ namespace MotivationLibrary
         {
         string[] negative = new string[9];
         negative[0] = "Jag vet att du kan bättre... ";
-        negative[1] = "Jag vet koma patienter som gör mer än vad du gör... ";
+        negative[1] = "Jag vet komapatienter som gör mer än vad du gör... ";
         negative[2] = "Jag blir så besviken...";
         negative[3] = "Din motivation får mig att vilja dö...";
         negative[4] = "Du är inte bara dålig, du är ful också...";
