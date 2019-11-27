@@ -2,12 +2,11 @@ using System;
 
 namespace MotivationLibrary
 {
-    public class Walking : Workout
+    public class Walking : WorkoutWithDistance
     {
-        public double DistanceKM { get; private set; }
-        public Walking(DateTime whenWorkedOut, double Distance, int minutesWorkOut, double points, TypeOfWorkout workout) : base(whenWorkedOut ,minutesWorkOut, points, workout)
+        public Walking(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points,double Distance) : base(workout, whenWorkedOut , Distance ,minutesWorkOut, points)
         {
-            this.DistanceKM = Distance;
+
         }
     }
 }

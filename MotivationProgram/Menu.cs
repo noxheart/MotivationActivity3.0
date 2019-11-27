@@ -42,7 +42,8 @@ namespace MotivationProgram
                         AddWorkoutInputMenu(user);
                         break;
                     case MenuMain.Statistic:
-                        //TODO Statistik
+                    var stats = new Statistics();
+                        stats.SeeWorkoutStatistics(user);
                         break;
                     case MenuMain.Group:
                         GroupMenu();
@@ -98,25 +99,25 @@ namespace MotivationProgram
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
-                    var workout = new Walking(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Walking);
+                    var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
                     workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
-                    var workout = new Running(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Running);
+                    var workout = new Running(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
                     workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
-                    var workout = new Swimming(whenWorkedOut, distance, minutesWorkedOut, points, TypeOfWorkout.Swimming);
+                    var workout = new Swimming(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
                     workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
-                    var workout = new Strength(whenWorkedOut, minutesWorkedOut, points, TypeOfWorkout.Strength);
+                    var workout = new Strength(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points);
                     workout.AddWorkout(user);
                 }
             }

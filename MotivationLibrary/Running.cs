@@ -2,14 +2,11 @@ using System;
 
 namespace MotivationLibrary
 {
-    public class Running: Workout
+    public class Running : WorkoutWithDistance
     {
-       public double DistanceKM {get; private set;}
-       public Running(DateTime whenWorkedOut, double Distance, int minutesWorkOut, double points,TypeOfWorkout workout) : base(whenWorkedOut ,minutesWorkOut, points, workout)
+        public Running(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points,double Distance) : base(workout, whenWorkedOut , Distance ,minutesWorkOut, points)
         {
-            this.WhenWorkOutOccured = whenWorkedOut;
-            this.DistanceKM = Distance;
-            this.MinutesWorkedOut = minutesWorkOut; 
-        }       
+
+        }
     }
 }

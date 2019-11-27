@@ -13,14 +13,27 @@ namespace MotivationLibrary
         {
             this.connectionString = connectionString;
         }
-        public IEnumerable<Workout> GetWorkouts(User user)
+        public List<Workout> GetWorkouts(User user)
         {
+            List<Workout> workouts = new List<Workout>();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Workout>($"Select * from SeeAllWorkouts where user = {user.ID}");
+                List<Walking> walking = connection.Query<Walking>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Walking)}").AsList();
+                 workouts.AddRange(walking);
+                
+                List<Running> running = connection.Query<Running>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Running)}").AsList();
+                 workouts.AddRange(running);
+                
+                List<Swimming> swimming = connection.Query<Swimming>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Swimming)}").AsList();
+                workouts.AddRange(swimming);
+
+                List<Strength> strength = connection.Query<Strength>($"dbo.SeeWorkoutStrengthOnly {user.ID}, {Convert.ToInt32(TypeOfWorkout.Strength)}").AsList();
+                workouts.AddRange(strength);
             }
+            return workouts;
         }
-        public IEnumerable<Workout> GetWorkouts(Group group)
+        public IEnumerable<Workout> GetWorkouts(Group group)//TODO MAYBE
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -34,11 +47,12 @@ namespace MotivationLibrary
                 {
                     connection.Query($"dbo.InsertWorkout {workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, '{workout.PointsForWorkout.ToString()}', '{null}'");
                 }
-                else
+                else if (workout.GetType() == typeof(WorkoutWithDistance))
                 {
-                    //TODO FIX ME
+                    WorkoutWithDistance workout1 = workout as WorkoutWithDistance;
+
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {Convert.ToDouble(workout.PointsForWorkout.ToString().Replace(",", "."))}");
+                     $"values ({workout1.WorkoutType}, {user.ID}, '{workout1.WhenWorkOutOccured}', {workout1.MinutesWorkedOut}, '{workout1.PointsForWorkout.ToString()}', {workout1.DistanceKM.ToString()}");
                 }
         }
         public User GetLogin(string UserName, string Password)
