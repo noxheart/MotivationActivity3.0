@@ -5,9 +5,14 @@ namespace MotivationLibrary
     public class WorkoutWithDistance : Workout
     {
         public double DistanceKM { get; private set; }
-        public WorkoutWithDistance(TypeOfWorkout workout, DateTime whenWorkedOut, double Distance, int minutesWorkOut, double points) : base(workout, whenWorkedOut ,minutesWorkOut, points)
+        public WorkoutWithDistance(TypeOfWorkout workout, DateTime whenWorkedOut, double distanceKM, int minutesWorkOut, double points) : base(workout, whenWorkedOut ,minutesWorkOut, points)
         {
-            this.DistanceKM = Distance;
+            this.DistanceKM = distanceKM;
+        }
+        
+        public WorkoutWithDistance(int workoutType, DateTime whenWorkedOut, double distanceKM, int minutesWorkOut, double points) : base(workoutType, whenWorkedOut ,minutesWorkOut, points)
+        {
+            this.DistanceKM = distanceKM;
         }
     }
 }

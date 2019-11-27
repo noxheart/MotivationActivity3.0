@@ -6,7 +6,11 @@ namespace MotivationLibrary
     {
        public Strength(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points) : base(workout, whenWorkedOut ,minutesWorkOut, points)
         {
-            this.WhenWorkOutOccured = whenWorkedOut;
+
+        }
+       public Strength(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut, double PointsForWorkout) : base(WorkoutType, WhenWorkOutOccured ,MinutesWorkedOut, PointsForWorkout)
+        {
+
         }
     }
 }
