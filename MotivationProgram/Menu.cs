@@ -42,8 +42,9 @@ namespace MotivationProgram
                         AddWorkoutInputMenu(user);
                         break;
                     case MenuMain.Statistic:
-                    var stats = new Statistics();
-                        stats.SeeWorkoutStatistics(user);
+                        StatisticMenu(user);
+                        Console.WriteLine("Tryck valfri tangent för att fortsätta.");
+                        Console.ReadKey();
                         break;
                     case MenuMain.Group:
                         GroupMenu();
@@ -105,19 +106,19 @@ namespace MotivationProgram
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
-                    var workout = new Running(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
+                    var workout = new Running(TypeOfWorkout.Running, whenWorkedOut, minutesWorkedOut, points, distance);
                     workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
-                    var workout = new Swimming(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
+                    var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut, minutesWorkedOut, points, distance);
                     workout.AddWorkout(user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
-                    var workout = new Strength(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points);
+                    var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut, minutesWorkedOut, points);
                     workout.AddWorkout(user);
                 }
             }
@@ -229,7 +230,7 @@ namespace MotivationProgram
 
 
         }
-        void StatisticMenu()
+        void StatisticMenu(User user)
         {
             MenuStatistic UserChoice = 0;
 
@@ -244,7 +245,8 @@ namespace MotivationProgram
             switch (UserChoice)
             {
                 case MenuStatistic.Personal:
-                    //Statistics.PersonalStatistics();
+                    var stats = new Statistics();
+                    stats.SeeWorkoutStatistics(user);
                     break;
 
                 case MenuStatistic.Group:
@@ -268,7 +270,7 @@ namespace MotivationProgram
             Console.WriteLine($"Välkommen {user.UserName}");
             if (user.PointsGoal > 0)
             {
-               Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.\n");
+                Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.\n");
             }
         }
     }
