@@ -22,7 +22,7 @@ namespace MotivationProgram
             {
                 Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
 
-                PointsInformationForUser(user, 7);
+                PointsInformationForUser(user);
 
                 //TODO Ge information om användaren, namn, poäng etc.
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.AddWorkout)}. Registrera träning");
@@ -260,14 +260,15 @@ namespace MotivationProgram
                     break;
             }
         }
-        public void PointsInformationForUser(User user, int days)
+        public void PointsInformationForUser(User user)
         {
             var stats = new Statistics();
+            double weeklyPoints = stats.WorkOutPointsFor(user);
 
             Console.WriteLine($"Välkommen {user.UserName}");
             if (user.PointsGoal > 0)
             {
-               // Console.WriteLine($"Den här veckan har du uppnåt {stats.WorkOutPointsFor(days, user)}/ {user.PointsGoal} poäng.\n");
+               Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.\n");
             }
         }
     }
