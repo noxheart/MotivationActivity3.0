@@ -8,30 +8,33 @@ namespace MotivationLibrary
         {
             if (workout.GetType() == typeof(Strength))
             {
-                Console.WriteLine($"{TypeOfWorkout.Strength.ToString()}\n");
+                Console.Write($"\n{TypeOfWorkout.Strength.ToString()}\n");
             }
-            else if (workout.GetType() == typeof(WorkoutWithDistance))
+            else if (workout.GetType() == typeof(Walking) ||
+            workout.GetType() == typeof(Running) ||
+            workout.GetType() == typeof(Swimming))
             {
                 WorkoutWithDistance workout1 = workout as WorkoutWithDistance;
 
                 if (workout.GetType() == typeof(Walking))
                 {
-                    Console.WriteLine($"{TypeOfWorkout.Walking.ToString()}\n");
+                    Console.Write($"\n{TypeOfWorkout.Walking.ToString()}\n");
                 }
                 else if (workout.GetType() == typeof(Running))
                 {
-                    Console.WriteLine($"{TypeOfWorkout.Running.ToString()}\n");
+                    Console.Write($"\n{TypeOfWorkout.Running.ToString()}\n");
                 }
                 else if (workout.GetType() == typeof(Swimming))
                 {
-                    Console.WriteLine($"{TypeOfWorkout.Swimming.ToString()}\n");
+                    Console.Write($"\n{TypeOfWorkout.Swimming.ToString()}\n");
                 }
-                Console.WriteLine($"Distans: {workout1.DistanceKM}\n");
+                Console.Write($"Distans: {workout1.DistanceKM}\n");
             }
-            Console.WriteLine(
-                $"Datum: {workout.WhenWorkOutOccured}\n" +
+            Console.Write(
+                $"Datum: {workout.WhenWorkOutOccured.ToString("yyyy/MM/dd")}\n" +
                 $"Minuter: {workout.MinutesWorkedOut}\n" +
                 $"Poäng: {workout.PointsForWorkout}\n");
+
         }
     }
 }

@@ -43,7 +43,7 @@ namespace MotivationProgram
                         break;
                     case MenuMain.Statistic:
                         StatisticMenu(user);
-                        Console.WriteLine("Tryck valfri tangent för att fortsätta.");
+                        Console.WriteLine("\nTryck valfri tangent för att fortsätta.");
                         Console.ReadKey();
                         break;
                     case MenuMain.Group:
@@ -74,26 +74,31 @@ namespace MotivationProgram
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
             whenWorkedOut = TryErrors.TryTime();
-            //TODO Ta tiden från användaren
+            Console.Clear();
+
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
             Console.WriteLine("1. Gång");
             Console.WriteLine("2. Löpning");
             Console.WriteLine("3. Simning");
             Console.WriteLine("4. Styrketräning");
             TypeOfWorkout workoutChoice = GetChoiceFromUser();
+            Console.Clear();
 
             if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
             workoutChoice == TypeOfWorkout.Swimming)
             {
-                Console.Write("Distans: ");
+                Console.Write("Distans i KM: ");
                 distance = TryErrors.TryDouble();
+                Console.Clear();
             }
 
             Console.Write("Träningstid i minuter: ");
             minutesWorkedOut = TryErrors.TryInt();
+            Console.Clear();
 
             Console.Write("Är du nöjd med träningen (J/N)?");
             happyWithChoice = TryErrors.TryYesOrNo();
+            Console.Clear();
 
             if (happyWithChoice == true)
             {
@@ -125,18 +130,21 @@ namespace MotivationProgram
             else
             {
                 Console.WriteLine("Du kommer nu att returneras till huvudmenyn.");
-                Thread.Sleep(1000);
             }
-            Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
-            if (points >= 80)
+            if (happyWithChoice == true)
             {
-                Console.WriteLine(comment.PositiveComment());
+                Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
+                if (points >= 80 || happyWithChoice == true)
+                {
+                    Console.WriteLine(comment.PositiveComment());
+                }
+                else
+                {
+                    Console.Write(comment.NegativeComment());
+                }
             }
-            else
-            {
-                Console.Write(comment.NegativeComment());
-            }
-            Thread.Sleep(5000);
+            Console.WriteLine("Klicka på valfri tangent för att fortsätta.");
+            Console.ReadKey();
         }
         TypeOfWorkout GetChoiceFromUser()
         {
@@ -246,6 +254,7 @@ namespace MotivationProgram
             {
                 case MenuStatistic.Personal:
                     var stats = new Statistics();
+                    Console.Clear();
                     stats.SeeWorkoutStatistics(user);
                     break;
 
