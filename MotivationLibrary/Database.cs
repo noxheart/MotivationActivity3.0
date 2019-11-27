@@ -20,11 +20,11 @@ namespace MotivationLibrary
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 List<Walking> walking = connection.Query<Walking>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Walking)}").AsList();
-                 workouts.AddRange(walking);
-                
+                workouts.AddRange(walking);
+
                 List<Running> running = connection.Query<Running>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Running)}").AsList();
-                 workouts.AddRange(running);
-                
+                workouts.AddRange(running);
+
                 List<Swimming> swimming = connection.Query<Swimming>($"dbo.SeeWorkout {user.ID}, {Convert.ToInt32(TypeOfWorkout.Swimming)}").AsList();
                 workouts.AddRange(swimming);
 
@@ -47,12 +47,12 @@ namespace MotivationLibrary
                 {
                     connection.Query($"dbo.InsertWorkout {workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, '{workout.PointsForWorkout.ToString()}', '{null}'");
                 }
-                else if (workout.GetType() == typeof(WorkoutWithDistance))
+                else if (workout.GetType() == typeof(Walking) ||
+                workout.GetType() == typeof(Running) ||
+                workout.GetType() == typeof(Swimming))
                 {
                     WorkoutWithDistance workout1 = workout as WorkoutWithDistance;
-
-                    connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values ({workout1.WorkoutType}, {user.ID}, '{workout1.WhenWorkOutOccured}', {workout1.MinutesWorkedOut}, '{workout1.PointsForWorkout.ToString()}', {workout1.DistanceKM.ToString()}");
+                    connection.Query($"dbo.InsertWorkout {workout1.WorkoutType}, {user.ID}, '{workout1.WhenWorkOutOccured}', {workout1.MinutesWorkedOut}, '{workout1.PointsForWorkout.ToString()}', '{workout1.DistanceKM.ToString()}'");
                 }
         }
         public User GetLogin(string UserName, string Password)
@@ -70,6 +70,6 @@ namespace MotivationLibrary
                 }
             }
         }
-  
+
     }
 }
