@@ -28,13 +28,11 @@ namespace MotivationLibrary
         public double WorkOutPointsFor(int days, User user)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
-
+            double i = 0;
             foreach (var workout in db.GetWorkouts(user))
             {
-                //TODO lägg till workouts senaste x dagarna. Metod?
             }
             //TODO skicka rätt double
-            double i = 0;
             return i;
         }
     }

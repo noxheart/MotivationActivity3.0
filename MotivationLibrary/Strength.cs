@@ -4,7 +4,7 @@ namespace MotivationLibrary
 {
     public class Strength: Workout
     {
-       public Strength(DateTime whenWorkedOut, int minutesWorkOut, double points, TypeOfWorkout workout) : base(whenWorkedOut ,minutesWorkOut, points, workout)
+       public Strength(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points) : base(workout, whenWorkedOut ,minutesWorkOut, points)
         {
             this.WhenWorkOutOccured = whenWorkedOut;
         }

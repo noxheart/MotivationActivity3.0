@@ -9,8 +9,8 @@ namespace MotivationLibrary
         public int MinutesWorkedOut { get; protected set; }
         public double PointsForWorkout { get; protected set; }
         public int WorkoutType { get; protected set; }
-
-        public Workout(DateTime whenWorkedOut, int minutesWorkedOut, double points, TypeOfWorkout workout)
+        public Workout(){}
+        public Workout(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkedOut, double points)
         {
             this.WhenWorkOutOccured = whenWorkedOut;
             this.MinutesWorkedOut = minutesWorkedOut;
