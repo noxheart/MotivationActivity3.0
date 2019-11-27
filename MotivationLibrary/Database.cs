@@ -3,7 +3,6 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using Dapper;
 using System.Linq;
-using System.Globalization;
 
 namespace MotivationLibrary
 {
@@ -14,11 +13,18 @@ namespace MotivationLibrary
         {
             this.connectionString = connectionString;
         }
-        public IEnumerable<Workout> GetWorkouts()
+        public IEnumerable<Workout> GetWorkouts(User user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Workout>("Select * from SeeAllWorkouts");
+                return connection.Query<Workout>($"Select * from SeeAllWorkouts where user = {user.ID}");
+            }
+        }
+        public IEnumerable<Workout> GetWorkouts(Group group)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                return connection.Query<Workout>("Select * from SeeAllWorkouts ");//TODO FIX
             }
         }
         public void AddWorkouts(Workout workout, User user)
@@ -30,8 +36,9 @@ namespace MotivationLibrary
                 }
                 else
                 {
+                    //TODO FIX ME
                     connection.Query($"insert into WorkoutSaved (TypeOfWorkout, Person, Date, timeMinutes, points, distanceKM)" +
-                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {Convert.ToDouble(workout.PointsForWorkout.ToString().Replace(",","."))}");
+                     $"values ({workout.WorkoutType}, {user.ID}, '{workout.WhenWorkOutOccured}', {workout.MinutesWorkedOut}, {Convert.ToDouble(workout.PointsForWorkout.ToString().Replace(",", "."))}");
                 }
         }
         public User GetLogin(string UserName, string Password)
@@ -41,21 +48,14 @@ namespace MotivationLibrary
             {
                 try
                 {
-                return connection.Query<User>($"EXEC GETUSER @UserName = '{UserName}', @Password = '{Password}';").First();  
+                    return connection.Query<User>($"EXEC GETUSER @UserName = '{UserName}', @Password = '{Password}';").First();
                 }
                 catch
                 {
                     return null;
                 }
-                    
             }
         }
-        public IEnumerable<User> GetUser(string UserName)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                return connection.Query<User>($"Select * from Person where UserName = '{UserName}';");
-            }
-        } 
+  
     }
 }
