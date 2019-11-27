@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
     var button = Request.Query["button"];
+    MotivationLibrary.Comments print = new MotivationLibrary.Comments();
 }
 
 <div class="text-left" style="background-color:white;">
@@ -13,6 +14,7 @@
         break;
 
         case "Statistik":
+        @print.NegativeComment();
         <div class="text-center"><p>Statistik</p></div>
         break;
 
