@@ -43,7 +43,7 @@ namespace MotivationProgram
                         break;
                     case MenuMain.Statistic:
                         StatisticMenu(user);
-                        Console.WriteLine("\nTryck valfri tangent för att fortsätta.");
+                        Console.Write("\nTryck valfri tangent för att fortsätta.");
                         Console.ReadKey();
                         break;
                     case MenuMain.Group:
@@ -77,10 +77,10 @@ namespace MotivationProgram
             Console.Clear();
 
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
-            Console.WriteLine("1. Gång");
-            Console.WriteLine("2. Löpning");
-            Console.WriteLine("3. Simning");
-            Console.WriteLine("4. Styrketräning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
             TypeOfWorkout workoutChoice = GetChoiceFromUser();
             Console.Clear();
 
@@ -143,7 +143,7 @@ namespace MotivationProgram
                     Console.Write(comment.NegativeComment());
                 }
             }
-            Console.WriteLine("\nKlicka på valfri tangent för att fortsätta.");
+            Console.Write("\nKlicka på valfri tangent för att fortsätta.");
             Console.ReadKey();
         }
         TypeOfWorkout GetChoiceFromUser()
