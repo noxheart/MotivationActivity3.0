@@ -29,7 +29,7 @@ namespace MotivationProgram
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Group)}. Grupp");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
-                Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Avsluta");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Logga ut");
                 Console.Write("Ditt val: ");
                 int input = TryErrors.TryInt();
                 userChoice = (MenuMain)input;
@@ -133,7 +133,7 @@ namespace MotivationProgram
             }
             if (happyWithChoice == true)
             {
-                Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
+                Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points} poäng!");
                 if (points >= 80)
                 {
                     Console.WriteLine(comment.PositiveComment());
@@ -279,7 +279,17 @@ namespace MotivationProgram
             Console.WriteLine($"Välkommen {user.UserName}");
             if (user.PointsGoal > 0)
             {
-                Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.\n");
+                Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.");
+                if (weeklyPoints >= user.PointsGoal)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Veckans poängmål uppnått\n");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine();
+                }
             }
         }
     }
