@@ -3,44 +3,85 @@
 @{
     ViewData["Title"] = "Home page";
     var button = Request.Query["button"];
-    MotivationLibrary.Comments print = new MotivationLibrary.Comments();
+    MotivationLibrary.Comments printComment = new MotivationLibrary.Comments();
     
     string UserName = "a";
     string Password = "a";
+
     var db = new MotivationLibrary.Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
     var stat = new MotivationLibrary.Statistics();
+    
     MotivationLibrary.User user = db.GetLogin(UserName, Password);
     double pointsThisWeek = stat.WorkOutPointsFor(user);
 
     int percent = Convert.ToInt32(pointsThisWeek/user.PointsGoal*100);
+
+    MotivationLibrary.Print printStatistic = new MotivationLibrary.Print();
 }
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 <div class="text-left" style="background-color:white;">
     @switch (button)
     {
         case "Registrera träning":
         <div class="text-center"><p>Registrera träning</p></div>
+        <form method="GET" action="">
+          När tränade du? (åååå-mm-dd): <input type="date" name="date">
+          <p></p>
+          Vilken typ av träning önskar du registrera?:<br>
+          <input type="radio" name="workout" value="Gång"> Gång <br>
+          <input type="radio" name="workout" value="Löpning"> Löpning<br>
+          <input type="radio" name="workout" value="Simning"> Simning<br>
+          <input type="radio" name="workout" value="Gång"> Styrketräning<br>
+          <p></p>
+          Distans i KM:
+          <input type="number" name="quantity" min="1" max="100"><br>
+          Träningstid i minuter:
+          <input type="time" name="usr_time"><br>
+          <p></p>
+
+          <Button type="submit" onclick="msg()">Registrera</Button>
+        </form>
+        <script>
+          function msg() {
+            alert("Ditt träningspass har nu registrerats. Du fick ---- poäng! \n @printComment.PositiveComment()");
+          }
+        </script>
         break;
 
         case "Statistik":
-        @print.NegativeComment();
         <div class="text-center"><p>Statistik</p></div>
+        @foreach (var workout in db.GetWorkouts(user))
+        {
+            string printThis = printStatistic.PrintStatistic(workout);
+            printThis=printThis.Replace("<BR />", Environment.NewLine);
+            @printThis
+            <p></p>
+        }
         break;
 
         case "Grupp":
         <div class="text-center"><p>Grupp</p></div>
+        <img src="img\working-clipart-work-in-progress-17.png" style="width:450px;height:450px" class="center">
         break;
-        
+
         case "Profil":
         <div class="text-center"><p>Profil</p></div>
-        <div class="text-Left"><p>Namn: @user.FirstName @user.LastName</p></div>
-        <div class="text-Left"><p>Veckomål: @pointsThisWeek / @user.PointsGoal Poäng</p></div>
-<div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@percent"
-  aria-valuemin="0" aria-valuemax="100" style="width:@percent%">
-    @percent%
-  </div>
-</div>
+          <div class="text-Left"><p>Namn: @user.FirstName @user.LastName</p></div>
+            <div class="text-Left"><p>Veckomål: @pointsThisWeek / @user.PointsGoal Poäng</p></div>
+              <img src="img\just-do-it-gif-transparent-3.gif" style="width:100px;height:100px" class="center">
+          <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@percent"
+          aria-valuemin="0" aria-valuemax="100" style="width:@percent%">
+             @percent%
+        </div>
+        </div>
         break;
 
         case "Logga ut":

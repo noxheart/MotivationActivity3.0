@@ -6,15 +6,17 @@ namespace MotivationLibrary
     public class Statistics
     {
         double Points { get; set; }
-        public void SeeWorkoutStatistics(User user)
+        public string SeeWorkoutStatistics(User user)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
             var print = new Print();
+            string textToPrint = "";
 
             foreach (var workout in db.GetWorkouts(user))
             {
-                print.PrintStatistic(workout);
+                textToPrint += print.PrintStatistic(workout);
             }
+            return textToPrint;
         }
         public void SeeWorkoutStatistics(Group group)
         {
