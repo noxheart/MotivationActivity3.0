@@ -29,7 +29,7 @@ namespace MotivationProgram
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Group)}. Grupp");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
-                Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Avsluta");
+                Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Logga ut");
                 Console.Write("Ditt val: ");
                 int input = TryErrors.TryInt();
                 userChoice = (MenuMain)input;
@@ -43,7 +43,7 @@ namespace MotivationProgram
                         break;
                     case MenuMain.Statistic:
                         StatisticMenu(user);
-                        Console.WriteLine("\nTryck valfri tangent för att fortsätta.");
+                        Console.Write("\nTryck valfri tangent för att fortsätta.");
                         Console.ReadKey();
                         break;
                     case MenuMain.Group:
@@ -78,10 +78,10 @@ namespace MotivationProgram
             Console.Clear();
 
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
-            Console.WriteLine("1. Gång");
-            Console.WriteLine("2. Löpning");
-            Console.WriteLine("3. Simning");
-            Console.WriteLine("4. Styrketräning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
             TypeOfWorkout workoutChoice = GetChoiceFromUser();
             Console.Clear();
 
@@ -134,7 +134,7 @@ namespace MotivationProgram
             }
             if (happyWithChoice == true)
             {
-                Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
+                Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points} poäng!");
                 if (points >= 80)
                 {
                     Console.WriteLine(comment.PositiveComment());
@@ -144,7 +144,7 @@ namespace MotivationProgram
                     Console.Write(comment.NegativeComment());
                 }
             }
-            Console.WriteLine("\nKlicka på valfri tangent för att fortsätta.");
+            Console.Write("\nKlicka på valfri tangent för att fortsätta.");
             Console.ReadKey();
         }
         TypeOfWorkout GetChoiceFromUser()
@@ -282,7 +282,17 @@ namespace MotivationProgram
             Console.WriteLine($"Välkommen {user.UserName}");
             if (user.PointsGoal > 0)
             {
-                Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.\n");
+                Console.WriteLine($"Den här veckan har du uppnåt {weeklyPoints}/ {user.PointsGoal} poäng.");
+                if (weeklyPoints >= user.PointsGoal)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Veckans poängmål uppnått\n");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine();
+                }
             }
         }
     }

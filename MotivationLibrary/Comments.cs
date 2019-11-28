@@ -27,7 +27,7 @@ namespace MotivationLibrary
         }
         public string NegativeComment()
         {
-        string[] negative = new string[9];
+        string[] negative = new string[10];
         negative[0] = "Jag vet att du kan bättre... ";
         negative[1] = "Jag vet komapatienter som gör mer än vad du gör... ";
         negative[2] = "Jag blir så besviken...";
@@ -36,7 +36,8 @@ namespace MotivationLibrary
         negative[5] = "Seriöst?...";
         negative[6] = "Okej, en pizza på det?...";
         negative[7] = "Kvist hade gjort detta bättre...";
-        negative[8] = "Jag vill skilljas...";
+        negative[8] = "Nein! Nein! Nein!!!!";
+        negative[9] = "Jag vill skilljas...";
 
         Random random = new Random();
 
