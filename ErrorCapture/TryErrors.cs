@@ -3,7 +3,7 @@
 namespace ErrorCapture
 {
     public class TryErrors
-    {   
+    {
         /// <summary>
         /// Checks if stringInput is correct
         /// </summary>
@@ -25,7 +25,7 @@ namespace ErrorCapture
             }
             return input;
         }
-        
+
         /// <summary>
         /// Takes user input of time
         /// </summary>
@@ -38,14 +38,31 @@ namespace ErrorCapture
                 try
                 {
                     date = Convert.ToDateTime(Console.ReadLine());
-                    break;
+                    bool trueDate = ValidDate(date);
+                    if (trueDate)
+                    {
+                        break;
+                    }
                 }
                 catch
                 {
                     ErrorMessage();
                 }
             }
+
             return date;
+        }
+        public static bool ValidDate(DateTime date)
+        {
+            if (date <= DateTime.Now)
+            {
+                return true;
+            }
+            else
+            {
+                ErrorMessage();
+                return false;
+            }
         }
 
         /// <summary>
@@ -73,19 +90,22 @@ namespace ErrorCapture
         public static bool TryYesOrNo()
         {
             bool yes;
-            while(true){
+            while (true)
+            {
                 try
                 {
-                    string input = Console.ReadLine().Substring(0,1).ToUpper();
-                    if(input == "J"){
+                    string input = Console.ReadLine().Substring(0, 1).ToUpper();
+                    if (input == "J")
+                    {
                         yes = true;
                         break;
                     }
-                    else if(input == "N"){
+                    else if (input == "N")
+                    {
                         yes = false;
                         break;
                     }
-                    else{ErrorMessage();}
+                    else { ErrorMessage(); }
                 }
                 catch
                 {

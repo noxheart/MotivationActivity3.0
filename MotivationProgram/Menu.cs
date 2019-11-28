@@ -74,6 +74,7 @@ namespace MotivationProgram
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
             whenWorkedOut = TryErrors.TryTime();
+            
             Console.Clear();
 
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
@@ -204,7 +205,7 @@ namespace MotivationProgram
                     break;
             }
         }
-        void UserMenu()
+        void UserMenu(User user)
         {
             MenuUser userChoice = 0;
 
@@ -224,6 +225,8 @@ namespace MotivationProgram
 
                 case MenuUser.ChangeUserInfo:
                     //TODO sub menu/metodanrop?
+                    Console.Write("Önskar du ändra:"  + user.Age.ToString());
+                    
                     break;
 
                 case MenuUser.Quit:
