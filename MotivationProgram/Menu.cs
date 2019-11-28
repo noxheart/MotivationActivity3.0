@@ -134,7 +134,7 @@ namespace MotivationProgram
             if (happyWithChoice == true)
             {
                 Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points}");
-                if (points >= 80 || happyWithChoice == true)
+                if (points >= 80)
                 {
                     Console.WriteLine(comment.PositiveComment());
                 }
@@ -143,7 +143,7 @@ namespace MotivationProgram
                     Console.Write(comment.NegativeComment());
                 }
             }
-            Console.WriteLine("Klicka på valfri tangent för att fortsätta.");
+            Console.WriteLine("\nKlicka på valfri tangent för att fortsätta.");
             Console.ReadKey();
         }
         TypeOfWorkout GetChoiceFromUser()
