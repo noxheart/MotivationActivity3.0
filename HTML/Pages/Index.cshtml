@@ -4,6 +4,15 @@
     ViewData["Title"] = "Home page";
     var button = Request.Query["button"];
     MotivationLibrary.Comments print = new MotivationLibrary.Comments();
+    
+    string UserName = "a";
+    string Password = "a";
+    var db = new MotivationLibrary.Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
+    var stat = new MotivationLibrary.Statistics();
+    MotivationLibrary.User user = db.GetLogin(UserName, Password);
+    double pointsThisWeek = stat.WorkOutPointsFor(user);
+
+    int percent = Convert.ToInt32(pointsThisWeek/user.PointsGoal*100);
 }
 
 <div class="text-left" style="background-color:white;">
@@ -24,6 +33,14 @@
         
         case "Profil":
         <div class="text-center"><p>Profil</p></div>
+        <div class="text-Left"><p>Namn: @user.FirstName @user.LastName</p></div>
+        <div class="text-Left"><p>Veckomål: @pointsThisWeek / @user.PointsGoal Poäng</p></div>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@percent"
+  aria-valuemin="0" aria-valuemax="100" style="width:@percent%">
+    @percent%
+  </div>
+</div>
         break;
 
         case "Logga ut":
