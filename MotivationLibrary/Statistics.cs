@@ -7,6 +7,12 @@ namespace MotivationLibrary
     public class Statistics
     {
         double Points { get; set; }
+        /// <summary>
+        /// 
+        /// //returns list of strings for every workout that is found in our database for specific user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public List<string> SeeWorkoutStatistics(User user)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
@@ -15,10 +21,15 @@ namespace MotivationLibrary
 
             foreach (var workout in db.GetWorkouts(user))
             {
-                listToSend.AddRange(print.PrintStatistic(workout));
+                listToSend.Add(print.PrintStatistic(workout));
             }
             return listToSend;
         }
+        /// <summary>
+        /// 
+        /// in progress
+        /// </summary>
+        /// <param name="group"></param>
         public void SeeWorkoutStatistics(Group group)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
@@ -29,6 +40,11 @@ namespace MotivationLibrary
                 print.PrintStatistic(workout);
             }
         }
+        /// <summary>
+        /// returns a double where workout is for this week
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public double WorkOutPointsFor(User user)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
@@ -44,6 +60,11 @@ namespace MotivationLibrary
             //TODO skicka rätt double
             return i;
         }
+        /// <summary>
+        /// checks if workout is this week
+        /// </summary>
+        /// <param name="workOutDate"></param>
+        /// <returns></returns>
         public bool CheckWeeks(DateTime workOutDate)
         {
             DateTimeFormatInfo dateTimeFormat = CultureInfo.GetCultureInfo("sv-SE").DateTimeFormat;
