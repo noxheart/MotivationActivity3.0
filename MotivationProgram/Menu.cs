@@ -1,7 +1,7 @@
 using System;
-using System.Threading;
 using MotivationLibrary;
 using ErrorCapture;
+using System.Collections.Generic;
 
 namespace MotivationProgram
 {
@@ -11,7 +11,6 @@ namespace MotivationProgram
         private enum MenuGroup { Quit = 0, CreatGroup, JoinGroup, LeaveGroup, Compete }
         private enum MenuUser { Quit = 0, ChangeUserInfo, ChangeGoals }
         private enum MenuStatistic { Quit = 0, Personal, Group }
-        Comments comment = new Comments();
         PointsCalculator pointsCalculator = new PointsCalculator();
         Group Group = new Group();
         public void MainMenu(User user)
@@ -74,7 +73,7 @@ namespace MotivationProgram
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
             whenWorkedOut = TryErrors.TryTime();
-            
+
             Console.Clear();
 
             Console.WriteLine("Vilken typ av träning önskar du registrera?");
@@ -134,6 +133,7 @@ namespace MotivationProgram
             }
             if (happyWithChoice == true)
             {
+                Comments comment = new Comments();
                 Console.WriteLine($"Ditt träningspass har nu registrerats. Du fick {points} poäng!");
                 if (points >= 80)
                 {
@@ -225,8 +225,8 @@ namespace MotivationProgram
 
                 case MenuUser.ChangeUserInfo:
                     //TODO sub menu/metodanrop?
-                    Console.Write("Önskar du ändra:"  + user.Age.ToString());
-                    
+                    Console.Write("Önskar du ändra:" + user.Age.ToString());
+
                     break;
 
                 case MenuUser.Quit:
@@ -256,9 +256,9 @@ namespace MotivationProgram
             switch (UserChoice)
             {
                 case MenuStatistic.Personal:
-                    var stats = new Statistics();
                     Console.Clear();
-                    stats.SeeWorkoutStatistics(user);
+                    Statistics stats = new Statistics();
+                    var listToPrint = stats.SeeWorkoutStatistics(user);
                     break;
 
                 case MenuStatistic.Group:
