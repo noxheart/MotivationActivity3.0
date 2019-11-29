@@ -1,5 +1,3 @@
-using System;
-
 namespace MotivationLibrary
 {
     public class Print
