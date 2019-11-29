@@ -4,7 +4,12 @@ namespace MotivationLibrary
 {
     public class Print
     {
-        public List<string> PrintStatistic(Workout workout)
+        /// <summary>
+        /// sends back a string for specific workout the way it should be printed
+        /// </summary>
+        /// <param name="workout"></param>
+        /// <returns></returns>
+        public string PrintStatistic(Workout workout)
         {
             List<String> listToSend = new List<String>();
             string textPrint = "";
@@ -38,8 +43,7 @@ namespace MotivationLibrary
                 $"Minuter: {workout.MinutesWorkedOut}\n" +
                 $"Poäng: {workout.PointsForWorkout}\n";
 
-                listToSend.Add(textPrint);
-                return listToSend;
+                return textPrint;
         }
     }
 }

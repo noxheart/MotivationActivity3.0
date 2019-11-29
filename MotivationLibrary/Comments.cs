@@ -4,6 +4,10 @@ namespace MotivationLibrary
 {
     public class Comments
     {
+        /// <summary>
+        /// returns a random positive comment as string
+        /// </summary>
+        /// <returns></returns>
         public string PositiveComment()
         {
         string[] positive = new string[11];
@@ -25,6 +29,10 @@ namespace MotivationLibrary
         
         return positive[index];
         }
+        /// <summary>
+        /// returns a random positive comment as string
+        /// </summary>
+        /// <returns></returns>
         public string NegativeComment()
         {
         string[] negative = new string[10];
