@@ -13,6 +13,11 @@ namespace MotivationLibrary
         {
             this.connectionString = connectionString;
         }
+        /// <summary>
+        /// returns all workouts in a list. Search where user = user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public List<Workout> GetWorkouts(User user)
         {
             List<Workout> workouts = new List<Workout>();
@@ -33,13 +38,23 @@ namespace MotivationLibrary
             }
             return workouts;
         }
-        public IEnumerable<Workout> GetWorkouts(Group group)//TODO MAYBE
+        /// <summary>
+        /// returns workouts in ienumerable where group is found
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public IEnumerable<Workout> GetWorkouts(Group group)//TODO
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 return connection.Query<Workout>("Select * from SeeAllWorkouts ");//TODO FIX
             }
         }
+        /// <summary>
+        /// adds created workout from specific user
+        /// </summary>
+        /// <param name="workout"></param>
+        /// <param name="user"></param>
         public void AddWorkouts(Workout workout, User user)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -55,6 +70,12 @@ namespace MotivationLibrary
                     connection.Query($"dbo.InsertWorkout {workout1.WorkoutType}, {user.ID}, '{workout1.WhenWorkOutOccured}', {workout1.MinutesWorkedOut}, '{workout1.PointsForWorkout.ToString()}', '{workout1.DistanceKM.ToString()}'");
                 }
         }
+        /// <summary>
+        /// takes username and password and tries to login. if it works it returns user or else returns void
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         public User GetLogin(string UserName, string Password)
         {
             //int numberOfTrueLogin;
