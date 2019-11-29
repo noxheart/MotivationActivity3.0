@@ -16,7 +16,7 @@
 
     int percent = Convert.ToInt32(pointsThisWeek/user.PointsGoal*100);
 
-    MotivationLibrary.Print printStatistic = new MotivationLibrary.Print();
+    //MotivationLibrary.Print printStatistic = new MotivationLibrary.Print();
 }
 <style>
 img {
@@ -57,12 +57,9 @@ img {
 
         case "Statistik":
         <div class="text-center"><p>Statistik</p></div>
-        @foreach (var workout in db.GetWorkouts(user))
+        @foreach (var workout in stat.SeeWorkoutStatistics(user))
         {
-            string printThis = printStatistic.PrintStatistic(workout);
-            printThis=printThis.Replace("<BR />", Environment.NewLine);
-            @printThis
-            <p></p>
+            <p>@workout</p>
         }
         break;
 

@@ -1,22 +1,23 @@
 using System;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace MotivationLibrary
 {
     public class Statistics
     {
         double Points { get; set; }
-        public string SeeWorkoutStatistics(User user)
+        public List<string> SeeWorkoutStatistics(User user)
         {
             var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
             var print = new Print();
-            string textToPrint = "";
+            List<String> listToSend = new List<String>();
 
             foreach (var workout in db.GetWorkouts(user))
             {
-                textToPrint += print.PrintStatistic(workout);
+                listToSend.AddRange(print.PrintStatistic(workout));
             }
-            return textToPrint;
+            return listToSend;
         }
         public void SeeWorkoutStatistics(Group group)
         {

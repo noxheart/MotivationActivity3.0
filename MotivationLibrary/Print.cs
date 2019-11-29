@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using System;
 namespace MotivationLibrary
 {
     public class Print
     {
-        public string PrintStatistic(Workout workout)//TODO FIX RETURN TO STRING INSTEAD
+        public List<string> PrintStatistic(Workout workout)
         {
+            List<String> listToSend = new List<String>();
             string textPrint = "";
+
             if (workout.GetType() == typeof(Strength))
             {
                  textPrint=$"\n{TypeOfWorkout.Strength.ToString()}\n";
@@ -33,7 +37,9 @@ namespace MotivationLibrary
                 textPrint+=$"Datum: {workout.WhenWorkOutOccured.ToString("yyyy/MM/dd")}\n" +
                 $"Minuter: {workout.MinutesWorkedOut}\n" +
                 $"Poäng: {workout.PointsForWorkout}\n";
-                return textPrint;
+
+                listToSend.Add(textPrint);
+                return listToSend;
         }
     }
 }
