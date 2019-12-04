@@ -30,9 +30,10 @@ img {
     @switch (button)
     {
         case "Registrera träning":
+        
         <div class="text-center"><p>Registrera träning</p></div>
         <form method="GET" action="">
-          När tränade du? (åååå-mm-dd): <input type="date" name="date">
+          När tränade du?: <input type="date" name="date">
           <p></p>
           Vilken typ av träning önskar du registrera?:<br>
           <input type="radio" name="workout" value="Gång"> Gång <br>
@@ -56,6 +57,7 @@ img {
         break;
 
         case "Statistik":
+
         <div class="text-center"><p>Statistik</p></div>
         @foreach (var workout in stat.SeeWorkoutStatistics(user))
         {
@@ -64,11 +66,13 @@ img {
         break;
 
         case "Grupp":
+
         <div class="text-center"><p>Grupp</p></div>
         <img src="img\working-clipart-work-in-progress-17.png" style="width:450px;height:450px" class="center">
         break;
 
         case "Profil":
+
         <div class="text-center"><p>Profil</p></div>
           <div class="text-Left"><p>Namn: @user.FirstName @user.LastName</p></div>
             <div class="text-Left"><p>Veckomål: @pointsThisWeek / @user.PointsGoal Poäng</p></div>
@@ -82,11 +86,14 @@ img {
         break;
 
         case "Logga ut":
+
         <div class="text-center"><p>Du loggas nu ut...</p></div>
         break;
 
         default:
-        <div class="text-center"><p>Välkommen till AktivitetsMotiveraren!</p>
+
+        <div class="text-center"><p>Välkommen till Ja, Do It!</p>
+        Unless an idiot would do it.. then don't!
         </div>
         break;
     }

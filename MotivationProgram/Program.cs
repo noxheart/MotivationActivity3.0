@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading;
 using ErrorCapture;
 using MotivationLibrary;
@@ -17,15 +16,15 @@ namespace MotivationProgram
 
             string UserName = "";
             string Password = "";
-
+            ErrorCheck error = new ErrorCheck();
 
             while (true)
             {
                 Console.Write("Ange användarnamn: ");
-                UserName = TryErrors.TryString();
+                UserName = error.TryString();
                 Console.Clear();
                 Console.Write("Ange lösenord: ");
-                Password = TryErrors.TryString();
+                Password = error.TryString();
 
                 var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
 
@@ -38,13 +37,13 @@ namespace MotivationProgram
                 }
                 else
                 {
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                     Thread.Sleep(1000);
                 }
 
                 Console.Clear();
                 Console.Write("Önskar du stänga av programmet: (J/N)");
-                bool yes = TryErrors.TryYesOrNo();
+                bool yes = error.TryYesOrNo();
                 if (yes == true)
                 {
                     break;

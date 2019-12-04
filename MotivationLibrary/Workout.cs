@@ -37,14 +37,5 @@ namespace MotivationLibrary
             this.PointsForWorkout = Points;
             this.WorkoutType = (int)Workout;
         }
-        /// <summary>
-        /// add workout for specific user. Takes us to database
-        /// </summary>
-        /// <param name="user"></param>
-        public void AddWorkout(User user)
-        {
-            var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
-            db.AddWorkouts(this, user);
-        }
     }
 }

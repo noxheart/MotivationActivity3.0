@@ -1,7 +1,6 @@
 using System;
 using MotivationLibrary;
 using ErrorCapture;
-using System.Collections.Generic;
 
 namespace MotivationProgram
 {
@@ -11,8 +10,9 @@ namespace MotivationProgram
         private enum MenuGroup { Quit = 0, CreatGroup, JoinGroup, LeaveGroup, Compete }
         private enum MenuUser { Quit = 0, ChangeUserInfo, ChangeGoals }
         private enum MenuStatistic { Quit = 0, Personal, Group }
-        private PointsCalculator pointsCalculator = new PointsCalculator();
-        private Group Group = new Group();
+        PointsCalculator pointsCalculator = new PointsCalculator();
+        Group Group = new Group();
+        ErrorCheck error = new ErrorCheck();
         public void MainMenu(User user)
         {
             MenuMain userChoice = 0;
@@ -30,7 +30,7 @@ namespace MotivationProgram
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Logga ut");
                 Console.Write("Ditt val: ");
-                int input = TryErrors.TryInt();
+                int input = error.TryInt();
                 userChoice = (MenuMain)input;
 
 
@@ -55,90 +55,77 @@ namespace MotivationProgram
                         break;
                     default:
                         Console.Clear();
-                        TryErrors.ErrorMessage();
-                        Console.Write("\nTryck valfri tangent för att fortsätta.");
-                        Console.ReadKey();
+                        error.ErrorMessage();
                         break;
                 }
             }
         }
-        private void AddWorkoutInputMenu(User user)
+        void AddWorkoutInputMenu(User user)
         {
             DateTime whenWorkedOut;
             double distance = 0;
             int minutesWorkedOut;
             bool happyWithChoice;
             double points = 0;
-            TypeOfWorkout workoutChoice;
 
             Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
 
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
-            whenWorkedOut = TryErrors.TryTime();
+            whenWorkedOut = error.TryTime();
 
             Console.Clear();
-            while (true)
+
+            Console.WriteLine("Vilken typ av träning önskar du registrera?");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
+            TypeOfWorkout workoutChoice = GetChoiceFromUser();
+            Console.Clear();
+
+            if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
+            workoutChoice == TypeOfWorkout.Swimming)
             {
-                Console.WriteLine("Vilken typ av träning önskar du registrera?");
-                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
-                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
-                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
-                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
-                workoutChoice = GetChoiceFromUser();
+                Console.Write("Distans i KM: ");
+                distance = error.TryDouble();
                 Console.Clear();
-
-
-                if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
-                workoutChoice == TypeOfWorkout.Swimming)
-                {
-                    Console.Write("Distans i KM: ");
-                    distance = TryErrors.TryDouble();
-                    Console.Clear();
-                    break;
-                }
-                else if (workoutChoice == TypeOfWorkout.Strength)
-                {
-                    break;
-                }
-
-                TryErrors.ErrorMessage();
-                Console.Write("\nTryck valfri tangent för att fortsätta.");
-                Console.ReadKey();
             }
+
             Console.Write("Träningstid i minuter: ");
-            minutesWorkedOut = TryErrors.TryInt();
+            minutesWorkedOut = error.TryInt();
             Console.Clear();
 
             Console.Write("Är du nöjd med träningen (J/N)?");
-            happyWithChoice = TryErrors.TryYesOrNo();
+            happyWithChoice = error.TryYesOrNo();
             Console.Clear();
 
             if (happyWithChoice == true)
             {
+                var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(TypeOfWorkout.Running, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut, minutesWorkedOut, points);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
             }
             else
@@ -161,7 +148,7 @@ namespace MotivationProgram
             Console.Write("\nKlicka på valfri tangent för att fortsätta.");
             Console.ReadKey();
         }
-        private TypeOfWorkout GetChoiceFromUser()
+        TypeOfWorkout GetChoiceFromUser()
         {
             int input;
             TypeOfWorkout workoutChoice;
@@ -176,12 +163,12 @@ namespace MotivationProgram
                 }
                 catch
                 {
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                 }
             }
             return workoutChoice;
         }
-        private void GroupMenu()
+        void GroupMenu()
         {
             MenuGroup userChoice = 0;
 
@@ -192,7 +179,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuGroup.LeaveGroup)}. Lämna grupp");
             Console.WriteLine($"{Convert.ToInt32(MenuGroup.Compete)}. Tävla");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             userChoice = (MenuGroup)input;
 
             switch (userChoice)
@@ -215,13 +202,11 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
-                    Console.Write("\nTryck valfri tangent för att fortsätta.");
-                    Console.ReadKey();
+                    error.ErrorMessage();
                     break;
             }
         }
-        private void UserMenu(User user)
+        void UserMenu(User user)
         {
             MenuUser userChoice = 0;
 
@@ -230,7 +215,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuUser.ChangeUserInfo)}. Ändra din information");
             Console.WriteLine($"{Convert.ToInt32(MenuUser.Quit)}. Avsluta");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             userChoice = (MenuUser)input;
 
             switch (userChoice)
@@ -250,16 +235,14 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
-                    Console.Write("\nTryck valfri tangent för att fortsätta.");
-                    Console.ReadKey();
+                    error.ErrorMessage();
                     break;
 
             }
 
 
         }
-        private void StatisticMenu(User user)
+        void StatisticMenu(User user)
         {
             MenuStatistic UserChoice = 0;
 
@@ -268,7 +251,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Group)}. Grupp statistik");
             Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Quit)}. Avsluta");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             UserChoice = (MenuStatistic)input;
 
             switch (UserChoice)
@@ -291,13 +274,11 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
-                    Console.Write("\nTryck valfri tangent för att fortsätta.");
-                    Console.ReadKey();
+                    error.ErrorMessage();
                     break;
             }
         }
-        private void PointsInformationForUser(User user)
+        public void PointsInformationForUser(User user)
         {
             var stats = new Statistics();
             double weeklyPoints = stats.WorkOutPointsFor(user);

@@ -1,6 +1,3 @@
-using System;
-using System.Globalization;
-
 namespace MotivationLibrary
 {
     public class PointsCalculator

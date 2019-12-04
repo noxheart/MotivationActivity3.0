@@ -2,13 +2,13 @@
 
 namespace ErrorCapture
 {
-    public class TryErrors
+    public class ErrorCheck
     {
         /// <summary>
         /// Checks if stringInput is correct
         /// </summary>
         /// <returns></returns>
-        public static string TryString()
+        public string TryString()
         {
             string input;
             while (true)
@@ -30,7 +30,7 @@ namespace ErrorCapture
         /// Takes user input of time
         /// </summary>
         /// <returns></returns>
-        public static DateTime TryTime()
+        public DateTime TryTime()
         {
             DateTime date;
             while (true)
@@ -52,7 +52,7 @@ namespace ErrorCapture
 
             return date;
         }
-        public static bool ValidDate(DateTime date)
+        public bool ValidDate(DateTime date)
         {
             if (date <= DateTime.Now)
             {
@@ -69,7 +69,7 @@ namespace ErrorCapture
         /// Checks if user entered a double
         /// </summary>
         /// <returns></returns>
-        public static double TryDouble()
+        public double TryDouble()
         {
             double input;
             while (true)
@@ -87,7 +87,7 @@ namespace ErrorCapture
             return input;
         }
 
-        public static bool TryYesOrNo()
+        public bool TryYesOrNo()
         {
             bool yes;
             while (true)
@@ -119,7 +119,7 @@ namespace ErrorCapture
         /// /// Checks if user entered a number correctly
         /// </summary>
         /// <returns></returns>
-        public static int TryInt()
+        public int TryInt()
         {
             int input;
             while (true)
@@ -140,7 +140,7 @@ namespace ErrorCapture
         /// <summary>
         /// Gives an error message
         /// </summary>
-        public static void ErrorMessage()
+        public void ErrorMessage()
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Var god och ange ett korrekt värde.\n");
