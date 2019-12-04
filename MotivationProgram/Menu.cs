@@ -1,7 +1,6 @@
 using System;
 using MotivationLibrary;
 using ErrorCapture;
-using System.Collections.Generic;
 
 namespace MotivationProgram
 {
