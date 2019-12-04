@@ -9,22 +9,22 @@ namespace MotivationLibrary
         double level1;
         double level2;
         double level3;
-        double timeLow; //TODO Förtydliga variabelnamn.
-        double timeHigh; //TODO Förtydliga variabelnamn.
+        double minimumTime; //TODO Förtydliga variabelnamn.
+        double maximumTime; //TODO Förtydliga variabelnamn.
         int minimumWorkoutTime = 15;
         public double PointsForRunning(int time, double distance)
         {
             level1 = 1.75;
             level2 = 2;
             level3 = 2.25;
-            timeLow = 5;
-            timeHigh = 6;
+            minimumTime = 5;
+            maximumTime = 6;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
@@ -39,14 +39,14 @@ namespace MotivationLibrary
             level1 = 0.75;
             level2 = 1;
             level3 = 1.25;
-            timeLow = 10;
-            timeHigh = 12;
+            minimumTime = 10;
+            maximumTime = 12;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
@@ -61,14 +61,14 @@ namespace MotivationLibrary
             level1 = 1.5;
             level2 = 1.75;
             level3 = 2;
-            timeLow = 17.5;
-            timeHigh = 24;
+            minimumTime = 17.5;
+            maximumTime = 24;
 
-            if (time / distance <= timeHigh && time / distance >= timeLow && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < timeLow && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
