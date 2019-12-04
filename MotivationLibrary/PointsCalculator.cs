@@ -2,13 +2,13 @@ namespace MotivationLibrary
 {
     public class PointsCalculator
     {
-        double pointsForWorkout;
-        double level1;
-        double level2;
-        double level3;
-        double minimumTime; //TODO Förtydliga variabelnamn.
-        double maximumTime; //TODO Förtydliga variabelnamn.
-        int minimumWorkoutTime = 15;
+        private double pointsForWorkout;
+        private double level1;
+        private double level2;
+        private double level3;
+        private double minimumTime; //TODO Förtydliga variabelnamn.
+        private double maximumTime; //TODO Förtydliga variabelnamn.
+        private int minimumWorkoutTime = 15;
         public double PointsForRunning(int time, double distance)
         {
             level1 = 1.75;
@@ -81,11 +81,6 @@ namespace MotivationLibrary
             pointsForWorkout = time * level1;
 
             return pointsForWorkout;
-        }
-        public double PointsForUserThisWeek(double points)
-        {
-            double pointsThisWeek = 0;
-            return pointsThisWeek;
         }
     }
 }

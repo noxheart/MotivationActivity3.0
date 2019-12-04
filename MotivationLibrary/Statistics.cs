@@ -6,7 +6,7 @@ namespace MotivationLibrary
 {
     public class Statistics
     {
-        double Points { get; set; }
+        private double Points { get; set; }
         /// <summary>
         /// 
         /// //returns list of strings for every workout that is found in our database for specific user
@@ -65,7 +65,7 @@ namespace MotivationLibrary
         /// </summary>
         /// <param name="workOutDate"></param>
         /// <returns></returns>
-        public bool CheckWeeks(DateTime workOutDate)
+        private bool CheckWeeks(DateTime workOutDate)
         {
             DateTimeFormatInfo dateTimeFormat = CultureInfo.GetCultureInfo("sv-SE").DateTimeFormat;
             Calendar calendar = dateTimeFormat.Calendar;

@@ -56,6 +56,8 @@ namespace MotivationProgram
                     default:
                         Console.Clear();
                         error.ErrorMessage();
+                        Console.Write("\nTryck valfri tangent för att fortsätta.");
+                        Console.ReadKey();
                         break;
                 }
             }
@@ -67,6 +69,7 @@ namespace MotivationProgram
             int minutesWorkedOut;
             bool happyWithChoice;
             double points = 0;
+            TypeOfWorkout workoutChoice;
 
             Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
 
@@ -75,23 +78,34 @@ namespace MotivationProgram
             whenWorkedOut = error.TryTime();
 
             Console.Clear();
-
-            Console.WriteLine("Vilken typ av träning önskar du registrera?");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
-            TypeOfWorkout workoutChoice = GetChoiceFromUser();
-            Console.Clear();
-
-            if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
-            workoutChoice == TypeOfWorkout.Swimming)
+            while (true)
             {
-                Console.Write("Distans i KM: ");
-                distance = error.TryDouble();
+                Console.WriteLine("Vilken typ av träning önskar du registrera?");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
+                workoutChoice = GetChoiceFromUser();
                 Console.Clear();
-            }
 
+                if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
+                workoutChoice == TypeOfWorkout.Swimming)
+                {
+                    Console.Write("Distans i KM: ");
+                    distance = error.TryDouble();
+                    Console.Clear();
+                    break;
+                }
+                else if (workoutChoice == TypeOfWorkout.Strength)
+                {
+                    break;
+                }
+
+                Console.Clear();
+                error.ErrorMessage();
+                Console.Write("\nTryck valfri tangent för att fortsätta.");
+                Console.ReadKey();
+            }
             Console.Write("Träningstid i minuter: ");
             minutesWorkedOut = error.TryInt();
             Console.Clear();
@@ -107,25 +121,25 @@ namespace MotivationProgram
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
-                    db.AddWorkouts(workout,user);
+                    db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(TypeOfWorkout.Running, whenWorkedOut, minutesWorkedOut, points, distance);
-                    db.AddWorkouts(workout,user);
+                    db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut, minutesWorkedOut, points, distance);
-                    db.AddWorkouts(workout,user);
+                    db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut, minutesWorkedOut, points);
-                    db.AddWorkouts(workout,user);
+                    db.AddWorkouts(workout, user);
                 }
             }
             else
@@ -203,6 +217,8 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     error.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
             }
         }
@@ -236,6 +252,8 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     error.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
 
             }
@@ -275,6 +293,8 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     error.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
             }
         }
