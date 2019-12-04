@@ -102,29 +102,30 @@ namespace MotivationProgram
 
             if (happyWithChoice == true)
             {
+                var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
                     var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
                     var workout = new Running(TypeOfWorkout.Running, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
                     var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut, minutesWorkedOut, points, distance);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
                     var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut, minutesWorkedOut, points);
-                    workout.AddWorkout(user);
+                    db.AddWorkouts(workout,user);
                 }
             }
             else
