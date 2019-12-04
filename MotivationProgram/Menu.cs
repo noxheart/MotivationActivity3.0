@@ -258,7 +258,10 @@ namespace MotivationProgram
                 case MenuStatistic.Personal:
                     Console.Clear();
                     Statistics stats = new Statistics();
-                    var listToPrint = stats.SeeWorkoutStatistics(user);
+                    foreach (var workout in stats.SeeWorkoutStatistics(user))
+                    {
+                        Console.WriteLine(workout);
+                    }
                     break;
 
                 case MenuStatistic.Group:
