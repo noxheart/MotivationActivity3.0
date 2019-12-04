@@ -61,7 +61,7 @@ namespace MotivationLibrary
             return i;
         }
         /// <summary>
-        /// checks if workout is this week
+        /// checks if workout date is in the same week and year as todays date
         /// </summary>
         /// <param name="workOutDate"></param>
         /// <returns></returns>
@@ -71,7 +71,9 @@ namespace MotivationLibrary
             Calendar calendar = dateTimeFormat.Calendar;
             int workOutWeek = calendar.GetWeekOfYear(workOutDate, dateTimeFormat.CalendarWeekRule, dateTimeFormat.FirstDayOfWeek);
             int currentWeek = calendar.GetWeekOfYear(DateTime.Now, dateTimeFormat.CalendarWeekRule, dateTimeFormat.FirstDayOfWeek);
-            return workOutWeek == currentWeek;
+            int workoutYear = calendar.GetYear(workOutDate);
+            int currentYear = calendar.GetYear(DateTime.Now);
+            return workOutWeek == currentWeek && workoutYear == currentYear;
         }
     }
 }
