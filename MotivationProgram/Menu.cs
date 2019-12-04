@@ -12,6 +12,7 @@ namespace MotivationProgram
         private enum MenuStatistic { Quit = 0, Personal, Group }
         PointsCalculator pointsCalculator = new PointsCalculator();
         Group Group = new Group();
+        ErrorCheck error = new ErrorCheck();
         public void MainMenu(User user)
         {
             MenuMain userChoice = 0;
@@ -29,7 +30,7 @@ namespace MotivationProgram
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.User)}. Profil");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Quit)}. Logga ut");
                 Console.Write("Ditt val: ");
-                int input = TryErrors.TryInt();
+                int input = error.TryInt();
                 userChoice = (MenuMain)input;
 
 
@@ -54,7 +55,7 @@ namespace MotivationProgram
                         break;
                     default:
                         Console.Clear();
-                        TryErrors.ErrorMessage();
+                        error.ErrorMessage();
                         break;
                 }
             }
@@ -71,7 +72,7 @@ namespace MotivationProgram
 
             Console.WriteLine("När tränade du? (åååå-mm-dd)");
             Console.Write("Datum: ");
-            whenWorkedOut = TryErrors.TryTime();
+            whenWorkedOut = error.TryTime();
 
             Console.Clear();
 
@@ -87,16 +88,16 @@ namespace MotivationProgram
             workoutChoice == TypeOfWorkout.Swimming)
             {
                 Console.Write("Distans i KM: ");
-                distance = TryErrors.TryDouble();
+                distance = error.TryDouble();
                 Console.Clear();
             }
 
             Console.Write("Träningstid i minuter: ");
-            minutesWorkedOut = TryErrors.TryInt();
+            minutesWorkedOut = error.TryInt();
             Console.Clear();
 
             Console.Write("Är du nöjd med träningen (J/N)?");
-            happyWithChoice = TryErrors.TryYesOrNo();
+            happyWithChoice = error.TryYesOrNo();
             Console.Clear();
 
             if (happyWithChoice == true)
@@ -161,7 +162,7 @@ namespace MotivationProgram
                 }
                 catch
                 {
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                 }
             }
             return workoutChoice;
@@ -177,7 +178,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuGroup.LeaveGroup)}. Lämna grupp");
             Console.WriteLine($"{Convert.ToInt32(MenuGroup.Compete)}. Tävla");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             userChoice = (MenuGroup)input;
 
             switch (userChoice)
@@ -200,7 +201,7 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                     break;
             }
         }
@@ -213,7 +214,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuUser.ChangeUserInfo)}. Ändra din information");
             Console.WriteLine($"{Convert.ToInt32(MenuUser.Quit)}. Avsluta");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             userChoice = (MenuUser)input;
 
             switch (userChoice)
@@ -233,7 +234,7 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                     break;
 
             }
@@ -249,7 +250,7 @@ namespace MotivationProgram
             Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Group)}. Grupp statistik");
             Console.WriteLine($"{Convert.ToInt32(MenuStatistic.Quit)}. Avsluta");
             Console.Write("Ditt val: ");
-            int input = TryErrors.TryInt();
+            int input = error.TryInt();
             UserChoice = (MenuStatistic)input;
 
             switch (UserChoice)
@@ -272,7 +273,7 @@ namespace MotivationProgram
 
                 default:
                     Console.Clear();
-                    TryErrors.ErrorMessage();
+                    error.ErrorMessage();
                     break;
             }
         }
