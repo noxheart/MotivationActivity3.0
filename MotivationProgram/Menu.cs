@@ -11,8 +11,8 @@ namespace MotivationProgram
         private enum MenuGroup { Quit = 0, CreatGroup, JoinGroup, LeaveGroup, Compete }
         private enum MenuUser { Quit = 0, ChangeUserInfo, ChangeGoals }
         private enum MenuStatistic { Quit = 0, Personal, Group }
-        PointsCalculator pointsCalculator = new PointsCalculator();
-        Group Group = new Group();
+        private PointsCalculator pointsCalculator = new PointsCalculator();
+        private Group Group = new Group();
         public void MainMenu(User user)
         {
             MenuMain userChoice = 0;
@@ -56,17 +56,20 @@ namespace MotivationProgram
                     default:
                         Console.Clear();
                         TryErrors.ErrorMessage();
+                        Console.Write("\nTryck valfri tangent för att fortsätta.");
+                        Console.ReadKey();
                         break;
                 }
             }
         }
-        void AddWorkoutInputMenu(User user)
+        private void AddWorkoutInputMenu(User user)
         {
             DateTime whenWorkedOut;
             double distance = 0;
             int minutesWorkedOut;
             bool happyWithChoice;
             double points = 0;
+            TypeOfWorkout workoutChoice;
 
             Console.Clear();//RENSAR FÖREGÅENDE MENY FÖR LÄTTARE LÄSNING.
 
@@ -75,23 +78,34 @@ namespace MotivationProgram
             whenWorkedOut = TryErrors.TryTime();
 
             Console.Clear();
-
-            Console.WriteLine("Vilken typ av träning önskar du registrera?");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
-            Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
-            TypeOfWorkout workoutChoice = GetChoiceFromUser();
-            Console.Clear();
-
-            if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
-            workoutChoice == TypeOfWorkout.Swimming)
+            while (true)
             {
-                Console.Write("Distans i KM: ");
-                distance = TryErrors.TryDouble();
+                Console.WriteLine("Vilken typ av träning önskar du registrera?");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Walking)}. Gång");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Running)}. Löpning");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Swimming)}. Simning");
+                Console.WriteLine($"{Convert.ToInt32(TypeOfWorkout.Strength)}. Styrketräning");
+                workoutChoice = GetChoiceFromUser();
                 Console.Clear();
-            }
 
+
+                if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
+                workoutChoice == TypeOfWorkout.Swimming)
+                {
+                    Console.Write("Distans i KM: ");
+                    distance = TryErrors.TryDouble();
+                    Console.Clear();
+                    break;
+                }
+                else if (workoutChoice == TypeOfWorkout.Strength)
+                {
+                    break;
+                }
+
+                TryErrors.ErrorMessage();
+                Console.Write("\nTryck valfri tangent för att fortsätta.");
+                Console.ReadKey();
+            }
             Console.Write("Träningstid i minuter: ");
             minutesWorkedOut = TryErrors.TryInt();
             Console.Clear();
@@ -147,7 +161,7 @@ namespace MotivationProgram
             Console.Write("\nKlicka på valfri tangent för att fortsätta.");
             Console.ReadKey();
         }
-        TypeOfWorkout GetChoiceFromUser()
+        private TypeOfWorkout GetChoiceFromUser()
         {
             int input;
             TypeOfWorkout workoutChoice;
@@ -167,7 +181,7 @@ namespace MotivationProgram
             }
             return workoutChoice;
         }
-        void GroupMenu()
+        private void GroupMenu()
         {
             MenuGroup userChoice = 0;
 
@@ -202,10 +216,12 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     TryErrors.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
             }
         }
-        void UserMenu(User user)
+        private void UserMenu(User user)
         {
             MenuUser userChoice = 0;
 
@@ -235,13 +251,15 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     TryErrors.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
 
             }
 
 
         }
-        void StatisticMenu(User user)
+        private void StatisticMenu(User user)
         {
             MenuStatistic UserChoice = 0;
 
@@ -274,10 +292,12 @@ namespace MotivationProgram
                 default:
                     Console.Clear();
                     TryErrors.ErrorMessage();
+                    Console.Write("\nTryck valfri tangent för att fortsätta.");
+                    Console.ReadKey();
                     break;
             }
         }
-        public void PointsInformationForUser(User user)
+        private void PointsInformationForUser(User user)
         {
             var stats = new Statistics();
             double weeklyPoints = stats.WorkOutPointsFor(user);
