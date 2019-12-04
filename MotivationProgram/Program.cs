@@ -7,6 +7,10 @@ namespace MotivationProgram
 {
     class Program
     {
+        /// <summary>
+        /// Start of program asks for login details and checks database for it. Enters Menu() if user is found.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.Clear();

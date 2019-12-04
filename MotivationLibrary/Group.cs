@@ -10,7 +10,7 @@ namespace MotivationLibrary
         {
 
         }
-        public void CreatGroup()
+        public void CreateGroup()
         {
 
         }

@@ -184,7 +184,7 @@ namespace MotivationProgram
             switch (userChoice)
             {
                 case MenuGroup.CreatGroup:
-                    Group.CreatGroup();
+                    Group.CreateGroup();
                     break;
 
                 case MenuGroup.JoinGroup:
