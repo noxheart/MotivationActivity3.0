@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 namespace MotivationLibrary
 {
-    public class Print
+    public class Print //For now a class to just printing statistics and keep seperated from statistics.
     {
         /// <summary>
         /// sends back a string for specific workout the way it should be printed

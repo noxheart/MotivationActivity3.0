@@ -2,7 +2,7 @@ using System;
 
 namespace MotivationLibrary
 {
-    public class Strength: Workout
+    public class Strength : Workout
     {
         /// <summary>
         /// constructor for inserting a workout
@@ -12,7 +12,8 @@ namespace MotivationLibrary
         /// <param name="minutesWorkOut"></param>
         /// <param name="points"></param>
         /// <returns></returns>
-       public Strength(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points) : base(workout, whenWorkedOut ,minutesWorkOut, points)
+        public Strength(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut,
+        double points) : base(workout, whenWorkedOut, minutesWorkOut, points)
         {
 
         }
@@ -24,7 +25,9 @@ namespace MotivationLibrary
         /// <param name="MinutesWorkedOut"></param>
         /// <param name="PointsForWorkout"></param>
         /// <returns></returns>
-       public Strength(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut, double PointsForWorkout) : base(WorkoutType, WhenWorkOutOccured ,MinutesWorkedOut, PointsForWorkout)
+        public Strength(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut,
+        double PointsForWorkout) : base(WorkoutType, WhenWorkOutOccured, MinutesWorkedOut,
+        PointsForWorkout)
         {
 
         }

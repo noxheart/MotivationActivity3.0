@@ -17,16 +17,16 @@ namespace MotivationProgram
             string UserName = "";
             string Password = "";
             ErrorCheck error = new ErrorCheck();
+            var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
 
             while (true)
             {
                 Console.Write("Ange användarnamn: ");
                 UserName = error.TryString();
                 Console.Clear();
+
                 Console.Write("Ange lösenord: ");
                 Password = error.TryString();
-
-                var db = new Database("Server=40.85.84.155;Database=Student5;User=Student5;Password=YH-student@2019;");
 
                 User user = db.GetLogin(UserName, Password);
 
@@ -47,10 +47,6 @@ namespace MotivationProgram
                 if (yes == true)
                 {
                     break;
-                }
-                else
-                {
-
                 }
             }
             Console.WriteLine("Programmet avslutas...");

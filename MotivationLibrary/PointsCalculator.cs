@@ -7,7 +7,7 @@ namespace MotivationLibrary
         private double level2;
         private double level3;
         private double minimumTime;
-        private double maximumTime; 
+        private double maximumTime;
         private int minimumWorkoutTime = 15;
         public double PointsForRunning(int time, double distance)
         {
@@ -17,11 +17,14 @@ namespace MotivationLibrary
             minimumTime = 5;
             maximumTime = 6;
 
-            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime &&
+            time / distance >= minimumTime &&
+            time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime &&
+            time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
@@ -39,11 +42,13 @@ namespace MotivationLibrary
             minimumTime = 10;
             maximumTime = 12;
 
-            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime &&
+            time / distance >= minimumTime && time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime &&
+            time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }
@@ -61,11 +66,14 @@ namespace MotivationLibrary
             minimumTime = 17.5;
             maximumTime = 24;
 
-            if (time / distance <= maximumTime && time / distance >= minimumTime && time >= minimumWorkoutTime)
+            if (time / distance <= maximumTime &&
+            time / distance >= minimumTime &&
+            time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level2;
             }
-            else if (time / distance < minimumTime && time >= minimumWorkoutTime)
+            else if (time / distance < minimumTime &&
+            time >= minimumWorkoutTime)
             {
                 pointsForWorkout = time * level3;
             }

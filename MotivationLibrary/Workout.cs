@@ -16,7 +16,8 @@ namespace MotivationLibrary
         /// <param name="whenWorkedOut"></param>
         /// <param name="minutesWorkOut"></param>
         /// <param name="points"></param>
-        public Workout(int workoutType, DateTime whenWorkedOut, int minutesWorkOut, double points)
+        public Workout(int workoutType, DateTime whenWorkedOut, 
+        int minutesWorkOut, double points)
         {
             this.WhenWorkOutOccured = whenWorkedOut;
             this.MinutesWorkedOut = minutesWorkOut;
@@ -30,7 +31,8 @@ namespace MotivationLibrary
         /// <param name="WhenWorkedOut"></param>
         /// <param name="MinutesWorkedOut"></param>
         /// <param name="Points"></param>
-        public Workout(TypeOfWorkout Workout, DateTime WhenWorkedOut, int MinutesWorkedOut, double Points)
+        public Workout(TypeOfWorkout Workout, DateTime WhenWorkedOut, 
+        int MinutesWorkedOut, double Points)
         {
             this.WhenWorkOutOccured = WhenWorkedOut;
             this.MinutesWorkedOut = MinutesWorkedOut;

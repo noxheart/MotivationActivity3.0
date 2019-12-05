@@ -87,7 +87,8 @@ namespace MotivationProgram
                 workoutChoice = GetChoiceFromUser();
                 Console.Clear();
 
-                if (workoutChoice == TypeOfWorkout.Walking || workoutChoice == TypeOfWorkout.Running ||
+                if (workoutChoice == TypeOfWorkout.Walking ||
+                workoutChoice == TypeOfWorkout.Running ||
                 workoutChoice == TypeOfWorkout.Swimming)
                 {
                     Console.Write("Distans i KM: ");
@@ -119,25 +120,29 @@ namespace MotivationProgram
                 if (workoutChoice == TypeOfWorkout.Walking)
                 {
                     points = pointsCalculator.PointsForWalking(minutesWorkedOut, distance);
-                    var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut, minutesWorkedOut, points, distance);
+                    var workout = new Walking(TypeOfWorkout.Walking, whenWorkedOut,
+                    minutesWorkedOut, points, distance);
                     db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Running)
                 {
                     points = pointsCalculator.PointsForRunning(minutesWorkedOut, distance);
-                    var workout = new Running(TypeOfWorkout.Running, whenWorkedOut, minutesWorkedOut, points, distance);
+                    var workout = new Running(TypeOfWorkout.Running, whenWorkedOut,
+                    minutesWorkedOut, points, distance);
                     db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Swimming)
                 {
                     points = pointsCalculator.PointsForSwimming(minutesWorkedOut, distance);
-                    var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut, minutesWorkedOut, points, distance);
+                    var workout = new Swimming(TypeOfWorkout.Swimming, whenWorkedOut,
+                    minutesWorkedOut, points, distance);
                     db.AddWorkouts(workout, user);
                 }
                 else if (workoutChoice == TypeOfWorkout.Strength)
                 {
                     points = pointsCalculator.PointsForStength(minutesWorkedOut);
-                    var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut, minutesWorkedOut, points);
+                    var workout = new Strength(TypeOfWorkout.Strength, whenWorkedOut,
+                    minutesWorkedOut, points);
                     db.AddWorkouts(workout, user);
                 }
             }
