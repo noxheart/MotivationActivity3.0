@@ -6,8 +6,8 @@ namespace MotivationLibrary
         private double level1;
         private double level2;
         private double level3;
-        private double minimumTime; //TODO Förtydliga variabelnamn.
-        private double maximumTime; //TODO Förtydliga variabelnamn.
+        private double minimumTime;
+        private double maximumTime; 
         private int minimumWorkoutTime = 15;
         public double PointsForRunning(int time, double distance)
         {

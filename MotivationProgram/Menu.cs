@@ -23,7 +23,6 @@ namespace MotivationProgram
 
                 PointsInformationForUser(user);
 
-                //TODO Ge information om användaren, namn, poäng etc.
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.AddWorkout)}. Registrera träning");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Statistic)}. Statistik");
                 Console.WriteLine($"{Convert.ToInt32(MenuMain.Group)}. Grupp");
@@ -211,7 +210,6 @@ namespace MotivationProgram
                     break;
 
                 case MenuGroup.Compete:
-                    //TODO fixa tävling
                     break;
 
                 default:
@@ -241,9 +239,6 @@ namespace MotivationProgram
                     break;
 
                 case MenuUser.ChangeUserInfo:
-                    //TODO sub menu/metodanrop?
-                    Console.Write("Önskar du ändra:" + user.Age.ToString());
-
                     break;
 
                 case MenuUser.Quit:
