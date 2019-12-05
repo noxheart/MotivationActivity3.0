@@ -43,11 +43,11 @@ namespace MotivationLibrary
         /// </summary>
         /// <param name="group"></param>
         /// <returns></returns>
-        public IEnumerable<Workout> GetWorkouts(Group group)//TODO
+        public IEnumerable<Workout> GetWorkouts(Group group)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return connection.Query<Workout>("Select * from SeeAllWorkouts ");//TODO FIX
+                return connection.Query<Workout>("Select * from SeeAllWorkouts ");
             }
         }
         /// <summary>

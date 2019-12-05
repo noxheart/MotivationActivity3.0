@@ -57,7 +57,6 @@ namespace MotivationLibrary
                     i = i + workout.PointsForWorkout;
                 }
             }
-            //TODO skicka rätt double
             return i;
         }
         /// <summary>
