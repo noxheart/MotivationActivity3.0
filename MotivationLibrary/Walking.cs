@@ -13,7 +13,9 @@ namespace MotivationLibrary
         /// <param name="points"></param>
         /// <param name="Distance"></param>
         /// <returns></returns>
-        public Walking(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut, double points,double Distance) : base(workout, whenWorkedOut , Distance ,minutesWorkOut, points)
+        public Walking(TypeOfWorkout workout, DateTime whenWorkedOut, int minutesWorkOut,
+        double points, double Distance) : base(workout, whenWorkedOut, Distance,
+        minutesWorkOut, points)
         {
 
         }
@@ -26,7 +28,9 @@ namespace MotivationLibrary
         /// <param name="PointsForWorkout"></param>
         /// <param name="DistanceKM"></param>
         /// <returns></returns>
-        public Walking(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut, double PointsForWorkout,double DistanceKM) : base(WorkoutType, WhenWorkOutOccured , DistanceKM ,MinutesWorkedOut, PointsForWorkout)
+        public Walking(int WorkoutType, DateTime WhenWorkOutOccured, int MinutesWorkedOut,
+        double PointsForWorkout, double DistanceKM) : base(WorkoutType, WhenWorkOutOccured,
+        DistanceKM, MinutesWorkedOut, PointsForWorkout)
         {
 
         }
